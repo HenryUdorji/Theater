@@ -6,12 +6,17 @@
         <item name="colorPrimaryVariant">@color/red</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/app_background_color</item>
         <!-- Customize your theme here. -->
     </style>
 
     <style name="SplashTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
         <item name="android:statusBarColor">@color/app_background_color</item>
+    </style>
+
+    <style name="TabTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/raleway_regular</item>
+        <item name="android:textSize">@dimen/_15ssp</item>
     </style>
 </resources>
