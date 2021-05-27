@@ -10,7 +10,7 @@
         android:roundIcon="@drawable/ic_app_logo"
         android:supportsRtl="true"
         android:theme="@style/SplashTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name=".ui.main.MainActivity"
             android:label=""
             android:windowSoftInputMode="stateHidden">
             <intent-filter>

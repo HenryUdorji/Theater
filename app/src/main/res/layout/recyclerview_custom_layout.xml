@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_120sdp"
+    android:layout_height="wrap_content"
+    android:background="@color/app_background_color">
+
+    <io.github.florent37.shapeofview.shapes.RoundRectView
+        android:id="@+id/imageShape"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_170sdp"
+        app:shape_roundRect_bottomLeftRadius="@dimen/_10sdp"
+        app:shape_roundRect_bottomRightRadius="@dimen/_10sdp"
+        app:shape_roundRect_topLeftRadius="@dimen/_10sdp"
+        app:shape_roundRect_topRightRadius="@dimen/_10sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/movieTitleText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/swipeImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/undraw_message_sent_1030"
+            android:scaleType="centerCrop"/>
+    </io.github.florent37.shapeofview.shapes.RoundRectView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/movieTitleText"
+        android:text="Joker"
+        android:textColor="@color/white"
+        android:fontFamily="@font/raleway_regular"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@id/imageShape"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/ratingImage"
+        android:layout_width="@dimen/_10sdp"
+        android:layout_height="@dimen/_10sdp"
+        android:src="@drawable/ic_star"
+        android:layout_marginTop="@dimen/_2sdp"
+        app:layout_constraintTop_toBottomOf="@id/movieTitleText"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/ratingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:fontFamily="@font/raleway_regular"
+        android:text="4.5"
+        android:textSize="@dimen/_8ssp"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/ratingImage"
+        app:layout_constraintTop_toTopOf="@id/ratingImage"
+        app:layout_constraintBottom_toBottomOf="@id/ratingImage"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

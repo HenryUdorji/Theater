@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/_5sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/genreText"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="wrap_content"
+        android:text="All"
+        android:textColor="@color/white"
+        android:background="@drawable/edit_bg"
+        android:padding="@dimen/_5sdp"
+        android:gravity="center"
+        android:fontFamily="@font/raleway_regular"/>
+
+</RelativeLayout>
