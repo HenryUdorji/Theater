@@ -331,10 +331,10 @@
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/popularRecyclerView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/showAllNewMoviesText"/>
+                app:layout_constraintEnd_toStartOf="@id/show_all_upcoming_movies_text"/>
 
             <TextView
-                android:id="@+id/showAllNewMoviesText"
+                android:id="@+id/show_all_upcoming_movies_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/show_all"

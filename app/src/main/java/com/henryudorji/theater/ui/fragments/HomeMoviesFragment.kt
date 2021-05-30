@@ -5,17 +5,21 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.theater.R
 import com.henryudorji.theater.adapters.MovieRecyclerAdapter
 import com.henryudorji.theater.data.model.Movie
-import com.henryudorji.theater.data.model.MovieResponse
 import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentHomeDetailBinding
 import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
+import com.henryudorji.theater.utils.Constants.MOVIE_CATEGORY
+import com.henryudorji.theater.utils.Constants.POPULAR
+import com.henryudorji.theater.utils.Constants.TOP_RATED
+import com.henryudorji.theater.utils.Constants.UPCOMING
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -91,15 +95,13 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 is IOException -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.network_fail_msg))
-                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
-                        Log.e(TAG, "getMoviesData: ${t.message}", )
+                        Log.e(TAG, "getMoviesData: ${t.message}")
                     }
                 }
                 else -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.conversion_error_msg))
-                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
-                        Log.e(TAG, "getMoviesData: ${t.message}", )
+                        Log.e(TAG, "getMoviesData: ${t.message}")
                     }
                 }
             }
@@ -128,21 +130,25 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
     }
 
     private fun hideShimmerPlaceHolder() {
-        binding.normalLayout.visibility = View.VISIBLE
-        binding.shimmerLayout.visibility = View.GONE
-        binding.popularShimmerFrame.stopShimmer()
-        binding.newMoviesShimmer.stopShimmer()
-        binding.topRatedMoviesShimmer.stopShimmer()
-        binding.swipeShimmer.stopShimmer()
+        binding.apply {
+            normalLayout.visibility = View.VISIBLE
+            shimmerLayout.visibility = View.GONE
+            popularShimmerFrame.stopShimmer()
+            newMoviesShimmer.stopShimmer()
+            topRatedMoviesShimmer.stopShimmer()
+            swipeShimmer.stopShimmer()
+        }
     }
 
     private fun showShimmerPlaceHolder() {
-        binding.normalLayout.visibility = View.GONE
-        binding.shimmerLayout.visibility = View.VISIBLE
-        binding.popularShimmerFrame.startShimmer()
-        binding.newMoviesShimmer.startShimmer()
-        binding.topRatedMoviesShimmer.startShimmer()
-        binding.swipeShimmer.startShimmer()
+        binding.apply {
+            normalLayout.visibility = View.GONE
+            shimmerLayout.visibility = View.VISIBLE
+            popularShimmerFrame.startShimmer()
+            newMoviesShimmer.startShimmer()
+            topRatedMoviesShimmer.startShimmer()
+            swipeShimmer.startShimmer()
+        }
     }
 
 
@@ -170,6 +176,27 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false).also {
                 hasFixedSize()
             }
+        }
+
+        binding.showAllPopularText.setOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable(MOVIE_CATEGORY, POPULAR)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+        }
+
+        binding.showAllUpcomingMoviesText.setOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable(MOVIE_CATEGORY, UPCOMING)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+        }
+
+        binding.showAllTopRatedMoviesText.setOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable(MOVIE_CATEGORY, TOP_RATED)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
         }
     }
 

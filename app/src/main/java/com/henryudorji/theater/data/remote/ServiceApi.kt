@@ -40,4 +40,34 @@ interface ServiceApi {
             @Query("language")
             language: String = "en-US"
     ): Response<MovieResponse>
+
+    @GET("tv/popular")
+    suspend fun getPopularTvSeries(
+            @Query("page")
+            page: Int = 1,
+            @Query("api_key")
+            apiKey: String = API_KEY,
+            @Query("language")
+            language: String = "en-US"
+    ): Response<MovieResponse>
+
+    @GET("tv/top_rated")
+    suspend fun getTopRatedTvSeries(
+            @Query("page")
+            page: Int = 1,
+            @Query("api_key")
+            apiKey: String = API_KEY,
+            @Query("language")
+            language: String = "en-US"
+    ): Response<MovieResponse>
+
+    @GET("tv/upcoming")
+    suspend fun getUpcomingTvSeries(
+            @Query("page")
+            page: Int = 1,
+            @Query("api_key")
+            apiKey: String = API_KEY,
+            @Query("language")
+            language: String = "en-US"
+    ): Response<MovieResponse>
 }
