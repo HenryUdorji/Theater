@@ -30,7 +30,14 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             HomeTrendingFragment()
         )
         viewpagerAdapter = ViewpagerAdapter(this, fragments)
-        binding.viewpager.adapter = viewpagerAdapter
+        binding.viewpager.apply {
+            adapter = viewpagerAdapter
+            isUserInputEnabled = false
+        }
+
+        //binding.viewpager.adapter = viewpagerAdapter
+        //binding.viewpager.isUserInputEnabled = false
+
 
         TabLayoutMediator(binding.tabs, binding.viewpager) {tab, position ->
             when(position) {
