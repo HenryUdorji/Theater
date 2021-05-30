@@ -1,226 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<!--This fragment sets the view for
+    MovieFragment,
+    TrendingFragment,
+    TvSeriesFragment
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/app_background_color">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!--SHIMMER LAYOUT-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/shimmerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="@dimen/_10sdp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:background="@color/app_background_color">
 
-        <!--@todo change height to wrap content-->
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/genreRecyclerView"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:background="@color/app_background_color"
+            xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <androidx.viewpager2.widget.ViewPager2
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/swipeShimmer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@color/app_background_color"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <androidx.cardview.widget.CardView android:layout_width="match_parent"
+                    android:layout_height="@dimen/_170sdp"
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/app_background_color"
+                    app:cardElevation="@dimen/_10sdp">
+
+                    <ImageView
+                        android:id="@+id/swipeImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/shimmer_placeholder"/>
+                </androidx.cardview.widget.CardView>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <TextView
+                android:id="@+id/popularMoviesTexts"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/popular_movies"
+                android:textSize="@dimen/_14ssp"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/white"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/swipeShimmer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/showAllPopularTexts"/>
+
+            <TextView
+                android:id="@+id/showAllPopularTexts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_all"
+                android:textSize="@dimen/_10ssp"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/red"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/popularShimmerFrame"
+                app:layout_constraintTop_toBottomOf="@id/swipeShimmer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/popularMoviesTexts"/>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/popularShimmerFrame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@color/app_background_color"
+                app:layout_constraintTop_toBottomOf="@id/popularMoviesTexts"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <include layout="@layout/shimmer_effect_placeholder"/>
+                    <include layout="@layout/shimmer_effect_placeholder"/>
+                    <include layout="@layout/shimmer_effect_placeholder"/>
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <TextView
+                android:id="@+id/newMoviesTexts"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/upcoming_movies"
+                android:textSize="@dimen/_14ssp"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/white"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/popularShimmerFrame"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/showAllNewMoviesTexts"/>
+
+            <TextView
+                android:id="@+id/showAllNewMoviesTexts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_all"
+                android:textSize="@dimen/_10ssp"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/red"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/newMoviesShimmer"
+                app:layout_constraintTop_toBottomOf="@id/popularShimmerFrame"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/newMoviesTexts"/>
+
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/newMoviesShimmer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@color/app_background_color"
+                app:layout_constraintTop_toBottomOf="@id/newMoviesTexts"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <include layout="@layout/shimmer_effect_placeholder"/>
+                    <include layout="@layout/shimmer_effect_placeholder"/>
+                    <include layout="@layout/shimmer_effect_placeholder"/>
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <TextView
+                android:id="@+id/topRatedMoviesTexts"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/top_rated"
+                android:textSize="@dimen/_14ssp"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/white"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/newMoviesShimmer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/showAllTopRatedMoviesTexts"/>
+
+            <TextView
+                android:id="@+id/showAllTopRatedMoviesTexts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_all"
+                android:textSize="@dimen/_10ssp"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/red"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/topRatedMoviesShimmer"
+                app:layout_constraintTop_toBottomOf="@id/newMoviesShimmer"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/topRatedMoviesTexts"/>
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/topRatedMoviesShimmer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@color/app_background_color"
+                app:layout_constraintTop_toBottomOf="@id/topRatedMoviesTexts"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <include layout="@layout/shimmer_effect_placeholder"/>
+                    <include layout="@layout/shimmer_effect_placeholder"/>
+                    <include layout="@layout/shimmer_effect_placeholder"/>
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!--NORMAL LAYOUT-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/normalLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:visibility="gone"
+        android:background="@color/app_background_color">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_170sdp"
-            android:id="@+id/swipeViewpager"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/genreRecyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <TextView
-            android:id="@+id/popularMoviesText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="POPULAR MOVIES"
-            android:textSize="@dimen/_14ssp"
-            android:fontFamily="@font/raleway_bold"
-            android:textColor="@color/white"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/swipeViewpager"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/showAllPopularText"/>
-
-        <TextView
-            android:id="@+id/showAllPopularText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="show all"
-            android:textSize="@dimen/_10ssp"
-            android:fontFamily="@font/raleway_regular"
-            android:textColor="@color/red"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@id/popularRecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/swipeViewpager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/popularMoviesText"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/popularRecyclerView"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/popularMoviesText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <TextView
-            android:id="@+id/newMoviesText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="NEW MOVIES"
-            android:textSize="@dimen/_14ssp"
-            android:fontFamily="@font/raleway_bold"
-            android:textColor="@color/white"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/popularRecyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/showAllNewMoviesText"/>
-
-        <TextView
-            android:id="@+id/showAllNewMoviesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="show all"
-            android:textSize="@dimen/_10ssp"
-            android:fontFamily="@font/raleway_regular"
-            android:textColor="@color/red"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@id/newMoviesRecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/popularRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/newMoviesText"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/newMoviesRecyclerView"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/newMoviesText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:background="@color/app_background_color">
 
 
-        <TextView
-            android:id="@+id/topRatedMoviesText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="TOP RATED"
-            android:textSize="@dimen/_14ssp"
-            android:fontFamily="@font/raleway_bold"
-            android:textColor="@color/white"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/newMoviesRecyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/showAllTopRatedMoviesText"/>
+            <androidx.viewpager2.widget.ViewPager2
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_170sdp"
+                android:id="@+id/swipeViewpager"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-            android:id="@+id/showAllTopRatedMoviesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="show all"
-            android:textSize="@dimen/_10ssp"
-            android:fontFamily="@font/raleway_regular"
-            android:textColor="@color/red"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@id/topRatedMoviesRecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/newMoviesRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/topRatedMoviesText"/>
+            <TextView
+                android:id="@+id/popularMoviesText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/popular_movies"
+                android:textSize="@dimen/_14ssp"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/white"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/swipeViewpager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/showAllPopularText"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/topRatedMoviesRecyclerView"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/topRatedMoviesText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/showAllPopularText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_all"
+                android:textSize="@dimen/_10ssp"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/red"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/popularRecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/swipeViewpager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/popularMoviesText"/>
 
-<!--
-        <TextView
-            android:id="@+id/nowPlayingMoviesText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="NOW PLAYING"
-            android:textSize="@dimen/_14ssp"
-            android:fontFamily="@font/raleway_bold"
-            android:textColor="@color/white"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/topRatedMoviesRecyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/showAllNowPlayingMoviesText"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/popularRecyclerView"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/popularMoviesText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-            android:id="@+id/showAllNowPlayingMoviesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="show all"
-            android:textSize="@dimen/_10ssp"
-            android:fontFamily="@font/raleway_regular"
-            android:textColor="@color/red"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@id/nowPlayingMoviesRecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/topRatedMoviesRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/nowPlayingMoviesText"/>
+            <TextView
+                android:id="@+id/newMoviesText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/upcoming_movies"
+                android:textSize="@dimen/_14ssp"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/white"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/popularRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/showAllNewMoviesText"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/nowPlayingMoviesRecyclerView"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/nowPlayingMoviesText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <TextView
+                android:id="@+id/showAllNewMoviesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_all"
+                android:textSize="@dimen/_10ssp"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/red"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/newMoviesRecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/popularRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/newMoviesText"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/newMoviesRecyclerView"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/newMoviesText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
 
-        <TextView
-            android:id="@+id/upcomingMoviesText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Upcoming"
-            android:textSize="@dimen/_14ssp"
-            android:fontFamily="@font/raleway_bold"
-            android:textColor="@color/white"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/nowPlayingMoviesRecyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/showAllUpcomingMoviesText"/>
+            <TextView
+                android:id="@+id/topRatedMoviesText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/top_rated"
+                android:textSize="@dimen/_14ssp"
+                android:fontFamily="@font/raleway_bold"
+                android:textColor="@color/white"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/newMoviesRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/showAllTopRatedMoviesText"/>
 
-        <TextView
-            android:id="@+id/showAllUpcomingMoviesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="show all"
-            android:textSize="@dimen/_10ssp"
-            android:fontFamily="@font/raleway_regular"
-            android:textColor="@color/red"
-            android:padding="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@id/upcomingMoviesRecyclerView"
-            app:layout_constraintTop_toBottomOf="@id/nowPlayingMoviesRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/nowPlayingMoviesText"/>
+            <TextView
+                android:id="@+id/showAllTopRatedMoviesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_all"
+                android:textSize="@dimen/_10ssp"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/red"
+                android:padding="@dimen/_10sdp"
+                app:layout_constraintBottom_toTopOf="@id/topRatedMoviesRecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/newMoviesRecyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/topRatedMoviesText"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/upcomingMoviesRecyclerView"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/upcomingMoviesText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>-->
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/topRatedMoviesRecyclerView"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/topRatedMoviesText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
+

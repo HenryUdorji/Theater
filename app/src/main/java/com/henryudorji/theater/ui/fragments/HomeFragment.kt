@@ -15,7 +15,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewpagerAdapter: ViewpagerAdapter
     private lateinit var fragments: MutableList<Fragment>
-    private var tabLayoutMediator: TabLayoutMediator? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,9 +25,9 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     private fun initViews() {
         fragments = mutableListOf(
-            MoviesFragment(),
-            TvSeriesFragment(),
-            TrendingFragment()
+            HomeMoviesFragment(),
+            HomeTvSeriesFragment(),
+            HomeTrendingFragment()
         )
         viewpagerAdapter = ViewpagerAdapter(this, fragments)
         binding.viewpager.adapter = viewpagerAdapter

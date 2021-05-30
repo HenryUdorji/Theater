@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge>
+    <androidx.core.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/app_background_color">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_10sdp"
+        android:background="@color/app_background_color"
+        android:id="@+id/shimmerLayout"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/swipeViewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/app_background_color"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/swipe_viewpager_shimmer_placeholder"/>
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+            android:id="@+id/popularMoviesTexts"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/popular_movies"
+            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/white"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/swipeViewpager"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/showAllPopularText"/>
+
+        <TextView
+            android:id="@+id/showAllPopularText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_all"
+            android:textSize="@dimen/_10ssp"
+            android:fontFamily="@font/raleway_regular"
+            android:textColor="@color/red"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@id/popularShimmerFrame"
+            app:layout_constraintTop_toBottomOf="@id/swipeViewpager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/popularMoviesTexts"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/popularShimmerFrame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/app_background_color"
+            app:layout_constraintTop_toBottomOf="@id/popularMoviesTexts"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_effect_placeholder"/>
+                <include layout="@layout/shimmer_effect_placeholder"/>
+                <include layout="@layout/shimmer_effect_placeholder"/>
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+            android:id="@+id/newMoviesText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/upcoming_movies"
+            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/white"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/popularShimmerFrame"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/showAllNewMoviesText"/>
+
+        <TextView
+            android:id="@+id/showAllNewMoviesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_all"
+            android:textSize="@dimen/_10ssp"
+            android:fontFamily="@font/raleway_regular"
+            android:textColor="@color/red"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@id/newMoviesRecyclerView"
+            app:layout_constraintTop_toBottomOf="@id/popularShimmerFrame"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/newMoviesText"/>
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/newMoviesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/app_background_color"
+            app:layout_constraintTop_toBottomOf="@id/newMoviesText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_effect_placeholder"/>
+                <include layout="@layout/shimmer_effect_placeholder"/>
+                <include layout="@layout/shimmer_effect_placeholder"/>
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+            android:id="@+id/topRatedMoviesText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/top_rated"
+            android:textSize="@dimen/_14ssp"
+            android:fontFamily="@font/raleway_bold"
+            android:textColor="@color/white"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/newMoviesRecyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/showAllTopRatedMoviesText"/>
+
+        <TextView
+            android:id="@+id/showAllTopRatedMoviesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/show_all"
+            android:textSize="@dimen/_10ssp"
+            android:fontFamily="@font/raleway_regular"
+            android:textColor="@color/red"
+            android:padding="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@id/topRatedMoviesRecyclerView"
+            app:layout_constraintTop_toBottomOf="@id/newMoviesRecyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/topRatedMoviesText"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/topRatedMoviesRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@color/app_background_color"
+            app:layout_constraintTop_toBottomOf="@id/topRatedMoviesText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_effect_placeholder"/>
+                <include layout="@layout/shimmer_effect_placeholder"/>
+                <include layout="@layout/shimmer_effect_placeholder"/>
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</merge>
+

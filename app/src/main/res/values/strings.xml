@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Theater</string>
+    <string name="connect_unavailable_msg">Internet connection unavailable, check connection and retry</string>
+    <string name="network_fail_msg">Network failure</string>
+    <string name="conversion_error_msg">Conversion Error</string>
+    <string name="popular_movies">POPULAR MOVIES</string>
+    <string name="show_all">show all</string>
+    <string name="upcoming_movies">UPCOMING MOVIES</string>
+    <string name="top_rated">TOP RATED</string>
+    <string name="retry">Retry</string>
 </resources>

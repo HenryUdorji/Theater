@@ -3,5 +3,6 @@
     <color name="red">#FF3434</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#757575</color>
+    <color name="shimmer_placeholder">#757575</color>
     <color name="app_background_color">#090909</color>
 </resources>

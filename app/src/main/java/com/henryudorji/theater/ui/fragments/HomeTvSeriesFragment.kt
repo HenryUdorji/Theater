@@ -10,7 +10,7 @@ import com.henryudorji.theater.databinding.FragmentMovieDetailBinding
 //
 // Created by hash on 5/2/2021.
 //
-class TvSeriesFragment: Fragment(R.layout.fragment_home_detail) {
+class HomeTvSeriesFragment: Fragment(R.layout.fragment_home_detail) {
     private lateinit var binding: FragmentMovieDetailBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

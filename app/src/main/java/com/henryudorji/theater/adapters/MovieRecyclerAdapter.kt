@@ -6,14 +6,16 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.henryudorji.theater.data.model.Movie
-import com.henryudorji.theater.databinding.RecyclerviewCustomLayoutBinding
+import com.henryudorji.theater.databinding.MovieCustomLayoutBinding
+import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
+import com.squareup.picasso.Picasso
 
 //
 // Created by hash on 5/3/2021.
 //
 class MovieRecyclerAdapter: RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
 
-    inner class MovieViewHolder(binding: RecyclerviewCustomLayoutBinding): RecyclerView.ViewHolder(binding.root)
+    inner class MovieViewHolder(val binding: MovieCustomLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object: DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -28,7 +30,7 @@ class MovieRecyclerAdapter: RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewH
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val binding = RecyclerviewCustomLayoutBinding.inflate(
+        val binding = MovieCustomLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -37,6 +39,13 @@ class MovieRecyclerAdapter: RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewH
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+        val movie = differ.currentList[position]
+
+        holder.binding.apply {
+            Picasso.get().load(BASE_URL_IMAGE + movie.posterPath).into(movieImage)
+            movieTitleText.text = movie.originalTitle
+            ratingText.text = movie.voteAverage.toString()
+        }
     }
 
     override fun getItemCount(): Int {
