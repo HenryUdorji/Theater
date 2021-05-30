@@ -35,10 +35,6 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             isUserInputEnabled = false
         }
 
-        //binding.viewpager.adapter = viewpagerAdapter
-        //binding.viewpager.isUserInputEnabled = false
-
-
         TabLayoutMediator(binding.tabs, binding.viewpager) {tab, position ->
             when(position) {
                 0 -> tab.text = "MOVIES"

@@ -1,17 +1,22 @@
 package com.henryudorji.theater.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.theater.R
 import com.henryudorji.theater.adapters.MovieRecyclerAdapter
+import com.henryudorji.theater.data.model.Movie
 import com.henryudorji.theater.data.model.MovieResponse
 import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentHomeDetailBinding
 import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
+import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,6 +27,7 @@ import java.io.IOException
 // Created by hash on 5/2/2021.
 //
 class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
+    private val TAG = "HomeMoviesFragment"
     private lateinit var binding: FragmentHomeDetailBinding
     lateinit var movieRepository: MovieRepository
     private lateinit var popularAdapter: MovieRecyclerAdapter
@@ -29,7 +35,6 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
     private lateinit var topRatedAdapter: MovieRecyclerAdapter
 
     private var moviePage = 1
-    private var movieResponseData: MovieResponse? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,6 +68,10 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                     }
                     topRatedMoviesData.body()?.let { movieResponse ->
                         topRatedAdapter.differ.submitList(movieResponse.movies.shuffled().subList(0, 10))
+                        //@todo load viewflipper data from a different endpoint
+                        withContext(Dispatchers.Main) {
+                            setupViewFlipper(movieResponse.movies)
+                        }
                     }
                     withContext(Dispatchers.Main) {
                         hideShimmerPlaceHolder()
@@ -82,17 +91,29 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 is IOException -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.network_fail_msg))
+                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
+                        Log.e(TAG, "getMoviesData: ${t.message}", )
                     }
                 }
                 else -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.conversion_error_msg))
+                        Toast.makeText(requireContext(), t.message, Toast.LENGTH_LONG).show()
+                        Log.e(TAG, "getMoviesData: ${t.message}", )
                     }
                 }
             }
         }
     }
 
+    private fun setupViewFlipper(movies: MutableList<Movie>) {
+        Picasso.get().load(BASE_URL_IMAGE + movies[0].posterPath).into(binding.firstImage)
+        Picasso.get().load(BASE_URL_IMAGE + movies[1].posterPath).into(binding.secondImage)
+        Picasso.get().load(BASE_URL_IMAGE + movies[2].posterPath).into(binding.thirdImage)
+        binding.swipeViewFlipper.startFlipping()
+
+        //@todo ClickListener on the Image
+    }
 
     private fun showNoNetworkSnackBar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_INDEFINITE)
