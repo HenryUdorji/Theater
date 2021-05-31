@@ -3,9 +3,13 @@ package com.henryudorji.theater.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AbsListView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.theater.R
 import com.henryudorji.theater.adapters.MovieRecyclerAdapter
@@ -14,7 +18,9 @@ import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentMovieListBinding
 import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
+import com.henryudorji.theater.utils.Constants.MOVIE_LIST_FRAG
 import com.henryudorji.theater.utils.Constants.POPULAR
+import com.henryudorji.theater.utils.Constants.QUERY_PAGE_SIZE
 import com.henryudorji.theater.utils.Constants.TOP_RATED
 import com.henryudorji.theater.utils.Constants.UPCOMING
 import kotlinx.coroutines.CoroutineScope
@@ -31,9 +37,10 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var movieListAdapter: MovieRecyclerAdapter
     private lateinit var movieCategory: String
-    lateinit var movieRepository: MovieRepository
+    private lateinit var movieRepository: MovieRepository
     private val args: MovieListFragmentArgs by navArgs()
     private var moviePage = 1
+    private var dataResponse: MovieResponse? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,11 +66,18 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
                     TOP_RATED -> movieRepository.getTopRatedMovies(moviePage)
                     else -> movieRepository.getPopularMovies(moviePage)
                 }
-                //val moviesData = movieRepository.getPopularMovies(moviePage)
 
                 if (moviesData.isSuccessful) {
                     moviesData.body()?.let { movieResponse ->
-                        movieListAdapter.differ.submitList(movieResponse.movies)
+                        moviePage++
+                        if (dataResponse == null) {
+                            dataResponse = movieResponse
+                        }else {
+                            val oldArticles = dataResponse?.movies
+                            val newArticles = movieResponse.movies
+                            oldArticles?.addAll(newArticles)
+                        }
+                        movieListAdapter.differ.submitList(dataResponse?.movies ?: movieResponse.movies)
                     }
                     withContext(Dispatchers.Main) {
                         hideShimmerPlaceHolder()
@@ -112,7 +126,6 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
         }
     }
 
-
     private fun showNoNetworkSnackBar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_INDEFINITE)
                 .setAction(getString(R.string.retry)) {
@@ -126,12 +139,51 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
     }
 
     private fun initViews() {
-        movieListAdapter = MovieRecyclerAdapter()
+        binding.backBtn.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
+        movieListAdapter = MovieRecyclerAdapter(MOVIE_LIST_FRAG)
 
         binding.movieListRv.apply {
             adapter = movieListAdapter
-            layoutManager = GridLayoutManager(requireContext(), 3)
+            layoutManager = GridLayoutManager(requireContext(), 2)
+            addOnScrollListener(this@MovieListFragment.scrollListener)
         }
     }
 
+    // Paginating the recyclerView
+    var isScrolling = false
+    var isLoading = false
+    var isLastPage = false
+
+    private val scrollListener = object: RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                isScrolling = true
+            }
+        }
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            val layoutManager = binding.movieListRv.layoutManager as LinearLayoutManager
+            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+            val visibleItemCount = layoutManager.childCount
+            val totalItemCount = layoutManager.itemCount
+
+            val isNotLoadingAndNotAtLastPage = !isLoading && !isLastPage
+            val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
+            val isNotAtBeginning = firstVisibleItemPosition >= 0
+            val isTotalMoreThanVisible = totalItemCount >= QUERY_PAGE_SIZE
+
+            val shouldPaginate = isNotLoadingAndNotAtLastPage && isAtLastItem && isNotAtBeginning
+                    && isTotalMoreThanVisible && isScrolling
+
+            if (shouldPaginate) {
+                getMoviesData()
+                isScrolling = false
+            }
+        }
+    }
 }

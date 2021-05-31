@@ -14,6 +14,9 @@ object Constants {
     const val TOP_RATED = "TOP_RATED"
 
 
+    const val QUERY_PAGE_SIZE = 20
     const val SNACKBAR_LENGHT_SHORT = 1
     const val SNACKBAR_LENGHT_LONG = 2
+    const val MOVIE_LIST_FRAG = 1
+    const val OTHER_FRAG = 2
 }

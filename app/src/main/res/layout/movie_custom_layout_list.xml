@@ -3,10 +3,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/_120sdp"
+    android:layout_width="match_parent"
     android:layout_margin="@dimen/_5sdp"
     android:layout_height="wrap_content"
-    android:id="@+id/rootLayout"
     android:background="@color/app_background_color">
 
     <io.github.florent37.shapeofview.shapes.RoundRectView

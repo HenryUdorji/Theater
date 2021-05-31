@@ -17,6 +17,7 @@ import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
 import com.henryudorji.theater.utils.Constants.MOVIE_CATEGORY
+import com.henryudorji.theater.utils.Constants.OTHER_FRAG
 import com.henryudorji.theater.utils.Constants.POPULAR
 import com.henryudorji.theater.utils.Constants.TOP_RATED
 import com.henryudorji.theater.utils.Constants.UPCOMING
@@ -33,7 +34,7 @@ import java.io.IOException
 class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
     private val TAG = "HomeMoviesFragment"
     private lateinit var binding: FragmentHomeDetailBinding
-    lateinit var movieRepository: MovieRepository
+    private lateinit var movieRepository: MovieRepository
     private lateinit var popularAdapter: MovieRecyclerAdapter
     private lateinit var upcomingAdapter: MovieRecyclerAdapter
     private lateinit var topRatedAdapter: MovieRecyclerAdapter
@@ -153,9 +154,9 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
 
 
     private fun initViews() {
-        popularAdapter = MovieRecyclerAdapter()
-        upcomingAdapter = MovieRecyclerAdapter()
-        topRatedAdapter = MovieRecyclerAdapter()
+        popularAdapter = MovieRecyclerAdapter(OTHER_FRAG)
+        upcomingAdapter = MovieRecyclerAdapter(OTHER_FRAG)
+        topRatedAdapter = MovieRecyclerAdapter(OTHER_FRAG)
 
         binding.popularRecyclerView.apply {
             adapter = popularAdapter
