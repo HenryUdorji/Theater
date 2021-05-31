@@ -1,10 +1,9 @@
-package com.henryudorji.theater.data.model
+package com.henryudorji.theater.data.model.recommendation
 
 
 import com.google.gson.annotations.SerializedName
-import java.io.Serializable
 
-data class Movie(
+data class Result(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
@@ -13,6 +12,8 @@ data class Movie(
     val genreIds: List<Int>,
     @SerializedName("id")
     val id: Int,
+    @SerializedName("media_type")
+    val mediaType: String,
     @SerializedName("original_language")
     val originalLanguage: String,
     @SerializedName("original_title")
@@ -33,4 +34,4 @@ data class Movie(
     val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
-): Serializable
+)

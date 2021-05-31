@@ -12,11 +12,12 @@ object Constants {
     const val POPULAR = "POPULAR"
     const val UPCOMING = "UPCOMING"
     const val TOP_RATED = "TOP_RATED"
+    const val TRENDING = "TRENDING"
+    const val MOVIE_DATA = "MOVIE_DATA"
 
 
     const val QUERY_PAGE_SIZE = 20
     const val SNACKBAR_LENGHT_SHORT = 1
     const val SNACKBAR_LENGHT_LONG = 2
-    const val MOVIE_LIST_FRAG = 1
-    const val OTHER_FRAG = 2
+    const val MOVIE_ID = "MOVIE_ID"
 }

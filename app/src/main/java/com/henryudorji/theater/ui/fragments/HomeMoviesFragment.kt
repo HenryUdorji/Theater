@@ -3,7 +3,6 @@ package com.henryudorji.theater.ui.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,9 +16,11 @@ import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
 import com.henryudorji.theater.utils.Constants.MOVIE_CATEGORY
-import com.henryudorji.theater.utils.Constants.OTHER_FRAG
+import com.henryudorji.theater.utils.Constants.MOVIE_DATA
+import com.henryudorji.theater.utils.Constants.MOVIE_ID
 import com.henryudorji.theater.utils.Constants.POPULAR
 import com.henryudorji.theater.utils.Constants.TOP_RATED
+import com.henryudorji.theater.utils.Constants.TRENDING
 import com.henryudorji.theater.utils.Constants.UPCOMING
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
@@ -37,6 +38,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
     private lateinit var movieRepository: MovieRepository
     private lateinit var popularAdapter: MovieRecyclerAdapter
     private lateinit var upcomingAdapter: MovieRecyclerAdapter
+    private lateinit var trendingAdapter: MovieRecyclerAdapter
     private lateinit var topRatedAdapter: MovieRecyclerAdapter
 
     private var moviePage = 1
@@ -63,8 +65,11 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 val popularMoviesData = movieRepository.getPopularMovies(moviePage)
                 val upcomingMoviesData = movieRepository.getUpcomingMovies(moviePage)
                 val topRatedMoviesData = movieRepository.getTopRatedMovies(moviePage)
+                val trendingMoviesData = movieRepository.getTrendingMovies(moviePage)
+                val nowPlayingMoviesData = movieRepository.getNowPlayingMovies(moviePage)
 
-                if (popularMoviesData.isSuccessful && upcomingMoviesData.isSuccessful && topRatedMoviesData.isSuccessful) {
+                if (popularMoviesData.isSuccessful && upcomingMoviesData.isSuccessful
+                    && topRatedMoviesData.isSuccessful && trendingMoviesData.isSuccessful) {
                     popularMoviesData.body()?.let { movieResponse ->
                         popularAdapter.differ.submitList(movieResponse.movies.shuffled().subList(0, 10))
                     }
@@ -73,11 +78,16 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                     }
                     topRatedMoviesData.body()?.let { movieResponse ->
                         topRatedAdapter.differ.submitList(movieResponse.movies.shuffled().subList(0, 10))
-                        //@todo load viewflipper data from a different endpoint
+                    }
+                    trendingMoviesData.body()?.let { movieResponse ->
+                        trendingAdapter.differ.submitList(movieResponse.movies.shuffled().subList(0, 10))
+                    }
+                    nowPlayingMoviesData.body()?.let { movieResponse ->
                         withContext(Dispatchers.Main) {
                             setupViewFlipper(movieResponse.movies)
                         }
                     }
+
                     withContext(Dispatchers.Main) {
                         hideShimmerPlaceHolder()
                     }
@@ -115,7 +125,24 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
         Picasso.get().load(BASE_URL_IMAGE + movies[2].posterPath).into(binding.thirdImage)
         binding.swipeViewFlipper.startFlipping()
 
-        //@todo ClickListener on the Image
+        binding.firstImage.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt(MOVIE_ID, movies[0].id)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+        }
+        binding.secondImage.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt(MOVIE_ID, movies[1].id)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+        }
+        binding.thirdImage.setOnClickListener {
+            val bundle = Bundle().apply {
+                putInt(MOVIE_ID, movies[2].id)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+        }
     }
 
     private fun showNoNetworkSnackBar(message: String) {
@@ -137,6 +164,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
             popularShimmerFrame.stopShimmer()
             newMoviesShimmer.stopShimmer()
             topRatedMoviesShimmer.stopShimmer()
+            trendingMoviesShimmer.stopShimmer()
             swipeShimmer.stopShimmer()
         }
     }
@@ -148,15 +176,17 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
             popularShimmerFrame.startShimmer()
             newMoviesShimmer.startShimmer()
             topRatedMoviesShimmer.startShimmer()
+            trendingMoviesShimmer.startShimmer()
             swipeShimmer.startShimmer()
         }
     }
 
 
     private fun initViews() {
-        popularAdapter = MovieRecyclerAdapter(OTHER_FRAG)
-        upcomingAdapter = MovieRecyclerAdapter(OTHER_FRAG)
-        topRatedAdapter = MovieRecyclerAdapter(OTHER_FRAG)
+        popularAdapter = MovieRecyclerAdapter()
+        upcomingAdapter = MovieRecyclerAdapter()
+        topRatedAdapter = MovieRecyclerAdapter()
+        trendingAdapter = MovieRecyclerAdapter()
 
         binding.popularRecyclerView.apply {
             adapter = popularAdapter
@@ -164,12 +194,24 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 hasFixedSize()
             }
         }
+        popularAdapter.setOnItemClickListener { movieID ->
+            val bundle = Bundle().apply {
+                putSerializable(MOVIE_ID, movieID)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+        }
 
-        binding.newMoviesRecyclerView.apply {
+        binding.upcomingMoviesRecyclerView.apply {
             adapter = upcomingAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false).also {
                 hasFixedSize()
             }
+        }
+        upcomingAdapter.setOnItemClickListener { movieID ->
+            val bundle = Bundle().apply {
+                putSerializable(MOVIE_ID, movieID)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
         }
 
         binding.topRatedMoviesRecyclerView.apply {
@@ -178,6 +220,26 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 hasFixedSize()
             }
         }
+        topRatedAdapter.setOnItemClickListener { movieID ->
+            val bundle = Bundle().apply {
+                putSerializable(MOVIE_ID, movieID)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+        }
+
+        binding.trendingMoviesRecyclerView.apply {
+            adapter = trendingAdapter
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false).also {
+                hasFixedSize()
+            }
+        }
+        trendingAdapter.setOnItemClickListener { movieID ->
+            val bundle = Bundle().apply {
+                putInt(MOVIE_ID, movieID)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+        }
+
 
         binding.showAllPopularText.setOnClickListener {
             val bundle = Bundle().apply {
@@ -196,6 +258,13 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
         binding.showAllTopRatedMoviesText.setOnClickListener {
             val bundle = Bundle().apply {
                 putSerializable(MOVIE_CATEGORY, TOP_RATED)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+        }
+
+        binding.showAllTrendingMoviesText.setOnClickListener {
+            val bundle = Bundle().apply {
+                putSerializable(MOVIE_CATEGORY, TRENDING)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
         }

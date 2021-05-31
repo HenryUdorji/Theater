@@ -27,7 +27,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         fragments = mutableListOf(
             HomeMoviesFragment(),
             HomeTvSeriesFragment(),
-            HomeTrendingFragment()
+            HomeSearchFragment()
         )
         viewpagerAdapter = ViewpagerAdapter(this, fragments)
         binding.viewpager.apply {
@@ -39,7 +39,7 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             when(position) {
                 0 -> tab.text = "MOVIES"
                 1 -> tab.text = "TV SERIES"
-                2 -> tab.text = "TRENDING"
+                2 -> tab.text = "SEARCH"
             }
             binding.viewpager.currentItem = tab.position
         }.attach()

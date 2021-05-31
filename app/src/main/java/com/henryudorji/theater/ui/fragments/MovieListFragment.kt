@@ -12,16 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.theater.R
-import com.henryudorji.theater.adapters.MovieRecyclerAdapter
+import com.henryudorji.theater.adapters.MovieListRecyclerAdapter
 import com.henryudorji.theater.data.model.MovieResponse
 import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentMovieListBinding
 import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
-import com.henryudorji.theater.utils.Constants.MOVIE_LIST_FRAG
+import com.henryudorji.theater.utils.Constants
+import com.henryudorji.theater.utils.Constants.MOVIE_DATA
 import com.henryudorji.theater.utils.Constants.POPULAR
 import com.henryudorji.theater.utils.Constants.QUERY_PAGE_SIZE
 import com.henryudorji.theater.utils.Constants.TOP_RATED
+import com.henryudorji.theater.utils.Constants.TRENDING
 import com.henryudorji.theater.utils.Constants.UPCOMING
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,7 +37,7 @@ import java.io.IOException
 class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
     private val TAG = "MovieListFragment"
     private lateinit var binding: FragmentMovieListBinding
-    private lateinit var movieListAdapter: MovieRecyclerAdapter
+    private lateinit var movieListAdapter: MovieListRecyclerAdapter
     private lateinit var movieCategory: String
     private lateinit var movieRepository: MovieRepository
     private val args: MovieListFragmentArgs by navArgs()
@@ -64,6 +66,7 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
                     POPULAR -> movieRepository.getPopularMovies(moviePage)
                     UPCOMING -> movieRepository.getUpcomingMovies(moviePage)
                     TOP_RATED -> movieRepository.getTopRatedMovies(moviePage)
+                    TRENDING -> movieRepository.getTrendingMovies(moviePage)
                     else -> movieRepository.getPopularMovies(moviePage)
                 }
 
@@ -143,13 +146,21 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
             requireActivity().onBackPressed()
         }
 
-        movieListAdapter = MovieRecyclerAdapter(MOVIE_LIST_FRAG)
+        movieListAdapter = MovieListRecyclerAdapter()
 
         binding.movieListRv.apply {
             adapter = movieListAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
             addOnScrollListener(this@MovieListFragment.scrollListener)
         }
+
+        movieListAdapter.setOnItemClickListener { movieData ->
+            val bundle = Bundle().apply {
+                putSerializable(MOVIE_DATA, movieData)
+            }
+            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+        }
+
     }
 
     // Paginating the recyclerView
