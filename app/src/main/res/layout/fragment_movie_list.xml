@@ -13,26 +13,26 @@
         android:layout_gravity="center"
         android:src="@drawable/ic_back"
         android:layout_marginStart="@dimen/_10sdp"
-        app:layout_constraintTop_toTopOf="@id/searchEdit"
-        app:layout_constraintBottom_toBottomOf="@id/searchEdit"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/toolbarTitle"
+        app:layout_constraintBottom_toBottomOf="@id/toolbarTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
-    <EditText
-        android:id="@+id/searchEdit"
+    <TextView
+        android:id="@+id/toolbarTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Search..."
-        android:inputType="text"
         android:fontFamily="@font/raleway_regular"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
+        android:text="@string/app_name"
+        android:textSize="@dimen/_13ssp"
         android:padding="@dimen/_10sdp"
-        android:drawableEnd="@drawable/ic_search"
         android:layout_margin="@dimen/_10sdp"
-        android:background="@drawable/edit_bg"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/backBtn"/>
+        app:layout_constraintStart_toEndOf="@id/backBtn"
+        />
 
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmerLayout"
@@ -42,7 +42,7 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@color/app_background_color"
-        app:layout_constraintTop_toBottomOf="@id/searchEdit"
+        app:layout_constraintTop_toBottomOf="@id/toolbarTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -96,7 +96,7 @@
         android:visibility="gone"
         android:layout_marginTop="@dimen/_5sdp"
         android:background="@color/app_background_color"
-        app:layout_constraintTop_toBottomOf="@id/searchEdit"
+        app:layout_constraintTop_toBottomOf="@id/toolbarTitle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

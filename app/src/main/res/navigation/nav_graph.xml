@@ -30,6 +30,10 @@
             android:name="MOVIE_CATEGORY"
             app:argType="string"
             android:defaultValue="POPULAR" />
+        <argument
+            android:name="FRAG_ID"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
@@ -49,5 +53,9 @@
             android:name="MOVIE_ID"
             app:argType="integer"
             android:defaultValue="0" />
+        <argument
+            android:name="FRAG_ID"
+            app:argType="integer"
+            android:defaultValue="1" />
     </fragment>
 </navigation>

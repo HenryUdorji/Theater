@@ -13,6 +13,7 @@ object Constants {
     const val UPCOMING = "UPCOMING"
     const val TOP_RATED = "TOP_RATED"
     const val TRENDING = "TRENDING"
+    const val LATEST = "LATEST"
     const val MOVIE_DATA = "MOVIE_DATA"
 
 
@@ -20,4 +21,7 @@ object Constants {
     const val SNACKBAR_LENGHT_SHORT = 1
     const val SNACKBAR_LENGHT_LONG = 2
     const val MOVIE_ID = "MOVIE_ID"
+    const val FRAG_ID = "FRAG_ID"
+    const val MOVIE = 1
+    const val TV_SERIES = 2
 }

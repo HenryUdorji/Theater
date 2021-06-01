@@ -7,5 +7,5 @@ data class VideoResponse(
     @SerializedName("id")
     val id: Int,
     @SerializedName("results")
-    val results: List<Result>
+    val videos: List<Video>
 )

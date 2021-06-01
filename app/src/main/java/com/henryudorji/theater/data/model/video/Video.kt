@@ -3,7 +3,7 @@ package com.henryudorji.theater.data.model.video
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class Video(
     @SerializedName("id")
     val id: String,
     @SerializedName("iso_3166_1")

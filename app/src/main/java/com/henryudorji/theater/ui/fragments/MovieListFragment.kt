@@ -19,7 +19,11 @@ import com.henryudorji.theater.databinding.FragmentMovieListBinding
 import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
 import com.henryudorji.theater.utils.Constants
+import com.henryudorji.theater.utils.Constants.FRAG_ID
+import com.henryudorji.theater.utils.Constants.LATEST
+import com.henryudorji.theater.utils.Constants.MOVIE
 import com.henryudorji.theater.utils.Constants.MOVIE_DATA
+import com.henryudorji.theater.utils.Constants.MOVIE_ID
 import com.henryudorji.theater.utils.Constants.POPULAR
 import com.henryudorji.theater.utils.Constants.QUERY_PAGE_SIZE
 import com.henryudorji.theater.utils.Constants.TOP_RATED
@@ -39,6 +43,7 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
     private lateinit var binding: FragmentMovieListBinding
     private lateinit var movieListAdapter: MovieListRecyclerAdapter
     private lateinit var movieCategory: String
+    private var fragID: Int = 1
     private lateinit var movieRepository: MovieRepository
     private val args: MovieListFragmentArgs by navArgs()
     private var moviePage = 1
@@ -49,6 +54,7 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
         binding = FragmentMovieListBinding.bind(view)
 
         movieCategory = args.moviecategory
+        //fragID = args.
         movieRepository = (activity as MainActivity).movieRepository
 
         initViews()
@@ -63,10 +69,11 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
         try {
             if (ConnectionManager.hasInternetConnection(requireContext())) {
                 val moviesData = when (movieCategory) {
-                    POPULAR -> movieRepository.getPopularMovies(moviePage)
+                    POPULAR -> if (fragID == 1) movieRepository.getPopularMovies(moviePage) else movieRepository.getPopularTvSeries(moviePage)
+                    TOP_RATED -> if (fragID == 1) movieRepository.getTopRatedMovies(moviePage) else movieRepository.getTopRatedMovies(moviePage)
+                    TRENDING -> if (fragID == 1) movieRepository.getTrendingMovies(moviePage) else movieRepository.getTrendingTvSeries(moviePage)
                     UPCOMING -> movieRepository.getUpcomingMovies(moviePage)
-                    TOP_RATED -> movieRepository.getTopRatedMovies(moviePage)
-                    TRENDING -> movieRepository.getTrendingMovies(moviePage)
+                    LATEST -> movieRepository.getLatestTvSeries(moviePage)
                     else -> movieRepository.getPopularMovies(moviePage)
                 }
 
@@ -146,6 +153,8 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
             requireActivity().onBackPressed()
         }
 
+        binding.toolbarTitle.text = getTitle()
+
         movieListAdapter = MovieListRecyclerAdapter()
 
         binding.movieListRv.apply {
@@ -154,13 +163,25 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
             addOnScrollListener(this@MovieListFragment.scrollListener)
         }
 
-        movieListAdapter.setOnItemClickListener { movieData ->
+        movieListAdapter.setOnItemClickListener { movieID ->
             val bundle = Bundle().apply {
-                putSerializable(MOVIE_DATA, movieData)
+                putInt(MOVIE_ID, movieID)
+                putInt(FRAG_ID, fragID)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
         }
 
+    }
+
+    private fun getTitle(): String {
+        return when(movieCategory) {
+            POPULAR -> if (fragID == 1) "Popular Movies" else "Popular TvSeries"
+            TOP_RATED -> if (fragID == 1) "TopRated Movies" else "TopRated TvSeries"
+            TRENDING -> if (fragID == 1) "Trending Movies" else "Trending TvSeries"
+            UPCOMING -> "Upcoming Movies"
+            LATEST -> "Latest TvSeries"
+            else -> ""
+        }
     }
 
     // Paginating the recyclerView

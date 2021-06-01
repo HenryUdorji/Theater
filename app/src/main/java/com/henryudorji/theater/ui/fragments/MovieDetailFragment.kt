@@ -15,6 +15,7 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
     private lateinit var binding: FragmentMovieDetailBinding
     private val args: MovieDetailFragmentArgs by navArgs()
     private var movieID: Int = 0
+    private var fragID: Int = 1
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

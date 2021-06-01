@@ -1,11 +1,13 @@
-package com.henryudorji.theater.data.model.detail
+package com.henryudorji.theater.data.model.detail.tvseries
 
 
 import com.google.gson.annotations.SerializedName
 import com.henryudorji.theater.data.model.detail.Genre
-import com.henryudorji.theater.data.model.detail.tvseries.*
+import com.henryudorji.theater.data.model.detail.ProductionCompany
+import com.henryudorji.theater.data.model.detail.ProductionCountry
+import com.henryudorji.theater.data.model.detail.SpokenLanguage
 
-data class DetailResponse(
+data class TvSeriesDetailResponse(
         @SerializedName("backdrop_path")
         val backdropPath: String,
         @SerializedName("created_by")

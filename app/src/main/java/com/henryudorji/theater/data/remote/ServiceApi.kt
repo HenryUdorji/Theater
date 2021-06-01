@@ -1,6 +1,11 @@
 package com.henryudorji.theater.data.remote
 
 import com.henryudorji.theater.data.model.MovieResponse
+import com.henryudorji.theater.data.model.cast.CastResponse
+import com.henryudorji.theater.data.model.detail.MovieDetailResponse
+import com.henryudorji.theater.data.model.detail.tvseries.TvSeriesDetailResponse
+import com.henryudorji.theater.data.model.review.ReviewResponse
+import com.henryudorji.theater.data.model.video.VideoResponse
 import com.henryudorji.theater.utils.Constants.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
@@ -37,7 +42,7 @@ interface ServiceApi {
         page: Int = 1,
         @Path("movie_id")
         movieId: Int
-    ): Response<MovieResponse>
+    ): Response<MovieDetailResponse>
 
     @GET("movie/{movie_id}/credits?api_key=$API_KEY&language=en-US")
     suspend fun getMovieCredit(
@@ -45,7 +50,7 @@ interface ServiceApi {
         page: Int = 1,
         @Path("movie_id")
         movieId: Int
-    ): Response<MovieResponse>
+    ): Response<CastResponse>
 
     @GET("movie/{movie_id}/recommendations?api_key=$API_KEY&language=en-US")
     suspend fun getMovieRecommendations(
@@ -61,7 +66,7 @@ interface ServiceApi {
         page: Int = 1,
         @Path("movie_id")
         movieId: Int
-    ): Response<MovieResponse>
+    ): Response<ReviewResponse>
 
     @GET("movie/{movie_id}/videos?api_key=$API_KEY&language=en-US")
     suspend fun getMovieVideos(
@@ -69,7 +74,7 @@ interface ServiceApi {
         page: Int = 1,
         @Path("movie_id")
         movieId: Int
-    ): Response<MovieResponse>
+    ): Response<VideoResponse>
 
     @GET("movie/now_playing?api_key=$API_KEY&language=en-US")
     suspend fun getNowPlayingMovies(
@@ -105,7 +110,7 @@ interface ServiceApi {
         page: Int = 1,
         @Path("tv_id")
         tvId: Int
-    ): Response<MovieResponse>
+    ): Response<TvSeriesDetailResponse>
 
     @GET("tv/{tv_id}/credits?api_key=$API_KEY&language=en-US")
     suspend fun getTvSeriesCredit(
@@ -113,7 +118,7 @@ interface ServiceApi {
         page: Int = 1,
         @Path("tv_id")
         tvId: Int
-    ): Response<MovieResponse>
+    ): Response<CastResponse>
 
     @GET("tv/{tv_id}/recommendations?api_key=$API_KEY&language=en-US")
     suspend fun getTvSeriesRecommendations(
@@ -129,7 +134,7 @@ interface ServiceApi {
         page: Int = 1,
         @Path("tv_id")
         tvId: Int
-    ): Response<MovieResponse>
+    ): Response<ReviewResponse>
 
     @GET("tv/{tv_id}/videos?api_key=$API_KEY&language=en-US")
     suspend fun getTvSeriesVideos(
@@ -137,7 +142,7 @@ interface ServiceApi {
         page: Int = 1,
         @Path("tv_id")
         tvId: Int
-    ): Response<MovieResponse>
+    ): Response<VideoResponse>
 
     @GET("tv/airing_today?api_key=$API_KEY&language=en-US")
     suspend fun getAiringTodayTvSeries(
@@ -170,7 +175,7 @@ interface ServiceApi {
         page: Int = 1,
         @Query("query")
         query: String
-    )
+    ): Response<MovieResponse>
 
     @GET("search/tv?api_key=$API_KEY&language=en-US&include_adult=false")
     suspend fun searchForTvSeries(
@@ -178,7 +183,7 @@ interface ServiceApi {
         page: Int = 1,
         @Query("query")
         query: String
-    )
+    ): Response<MovieResponse>
 
     //SEARCH API - END
 }

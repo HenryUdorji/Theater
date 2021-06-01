@@ -113,10 +113,73 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/ratingImage"
+            app:layout_constraintTop_toBottomOf="@id/budgetText"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />
+
+        <TextView
+            android:id="@+id/budgetText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Budget: $100000"
+            android:fontFamily="@font/raleway_regular"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/gray"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/ratingImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/revenueText"
+            />
+
+        <TextView
+            android:id="@+id/revenueText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Revenue: $100000"
+            android:fontFamily="@font/raleway_regular"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/gray"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/ratingImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/budgetText"
+            />
+
+        <TextView
+            android:id="@+id/seasonText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Seasons: 10"
+            android:fontFamily="@font/raleway_regular"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/gray"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/ratingImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/revenueText"
+            />
+
+        <TextView
+            android:id="@+id/episodeText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Episode: 90"
+            android:fontFamily="@font/raleway_regular"
+            android:textSize="@dimen/_11ssp"
+            android:textColor="@color/gray"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/ratingImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/budgetText"
+            />
+
 
         <TextView
             android:id="@+id/watch"
@@ -132,6 +195,18 @@
             app:layout_constraintTop_toBottomOf="@id/genreRv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/videoRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/watch"
             />
 
         <io.github.florent37.shapeofview.shapes.RoundRectView
@@ -153,7 +228,6 @@
                 android:id="@+id/youtubePlayerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:videoId="S0Q4gqBUs7c"
                 app:autoPlay="false"
                 app:showFullScreenButton="false" />
         </io.github.florent37.shapeofview.shapes.RoundRectView>

@@ -393,7 +393,7 @@
                 android:fontFamily="@font/raleway_regular"
                 android:textColor="@color/red"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@id/upcoming_movies_recycler_view"
+                app:layout_constraintBottom_toTopOf="@id/latest_recycler_view"
                 app:layout_constraintTop_toBottomOf="@id/popularRecyclerView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/newMoviesText"/>
@@ -401,7 +401,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/upcoming_movies_recycler_view"
+                android:id="@+id/latest_recycler_view"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/newMoviesText"
@@ -418,7 +418,7 @@
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/upcoming_movies_recycler_view"
+                app:layout_constraintTop_toBottomOf="@id/latest_recycler_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/showAllTopRatedMoviesText"/>
 
@@ -432,7 +432,7 @@
                 android:textColor="@color/red"
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@id/topRatedMoviesRecyclerView"
-                app:layout_constraintTop_toBottomOf="@id/upcoming_movies_recycler_view"
+                app:layout_constraintTop_toBottomOf="@id/latest_recycler_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/topRatedMoviesText"/>
 

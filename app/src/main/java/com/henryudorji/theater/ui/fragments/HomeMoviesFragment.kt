@@ -15,8 +15,9 @@ import com.henryudorji.theater.databinding.FragmentHomeDetailBinding
 import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
+import com.henryudorji.theater.utils.Constants.FRAG_ID
+import com.henryudorji.theater.utils.Constants.MOVIE
 import com.henryudorji.theater.utils.Constants.MOVIE_CATEGORY
-import com.henryudorji.theater.utils.Constants.MOVIE_DATA
 import com.henryudorji.theater.utils.Constants.MOVIE_ID
 import com.henryudorji.theater.utils.Constants.POPULAR
 import com.henryudorji.theater.utils.Constants.TOP_RATED
@@ -128,18 +129,21 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
         binding.firstImage.setOnClickListener {
             val bundle = Bundle().apply {
                 putInt(MOVIE_ID, movies[0].id)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
         }
         binding.secondImage.setOnClickListener {
             val bundle = Bundle().apply {
                 putInt(MOVIE_ID, movies[1].id)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
         }
         binding.thirdImage.setOnClickListener {
             val bundle = Bundle().apply {
                 putInt(MOVIE_ID, movies[2].id)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
         }
@@ -196,12 +200,13 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
         }
         popularAdapter.setOnItemClickListener { movieID ->
             val bundle = Bundle().apply {
-                putSerializable(MOVIE_ID, movieID)
+                putInt(MOVIE_ID, movieID)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
         }
 
-        binding.upcomingMoviesRecyclerView.apply {
+        binding.latestRecyclerView.apply {
             adapter = upcomingAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false).also {
                 hasFixedSize()
@@ -209,7 +214,8 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
         }
         upcomingAdapter.setOnItemClickListener { movieID ->
             val bundle = Bundle().apply {
-                putSerializable(MOVIE_ID, movieID)
+                putInt(MOVIE_ID, movieID)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
         }
@@ -222,7 +228,8 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
         }
         topRatedAdapter.setOnItemClickListener { movieID ->
             val bundle = Bundle().apply {
-                putSerializable(MOVIE_ID, movieID)
+                putInt(MOVIE_ID, movieID)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
         }
@@ -236,6 +243,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
         trendingAdapter.setOnItemClickListener { movieID ->
             val bundle = Bundle().apply {
                 putInt(MOVIE_ID, movieID)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
         }
@@ -243,28 +251,32 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
 
         binding.showAllPopularText.setOnClickListener {
             val bundle = Bundle().apply {
-                putSerializable(MOVIE_CATEGORY, POPULAR)
+                putString(MOVIE_CATEGORY, POPULAR)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
         }
 
         binding.showAllUpcomingMoviesText.setOnClickListener {
             val bundle = Bundle().apply {
-                putSerializable(MOVIE_CATEGORY, UPCOMING)
+                putString(MOVIE_CATEGORY, UPCOMING)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
         }
 
         binding.showAllTopRatedMoviesText.setOnClickListener {
             val bundle = Bundle().apply {
-                putSerializable(MOVIE_CATEGORY, TOP_RATED)
+                putString(MOVIE_CATEGORY, TOP_RATED)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
         }
 
         binding.showAllTrendingMoviesText.setOnClickListener {
             val bundle = Bundle().apply {
-                putSerializable(MOVIE_CATEGORY, TRENDING)
+                putString(MOVIE_CATEGORY, TRENDING)
+                putInt(FRAG_ID, MOVIE)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
         }
