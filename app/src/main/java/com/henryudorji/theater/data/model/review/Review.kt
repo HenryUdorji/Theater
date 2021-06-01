@@ -3,7 +3,7 @@ package com.henryudorji.theater.data.model.review
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class Review(
     @SerializedName("author")
     val author: String,
     @SerializedName("author_details")

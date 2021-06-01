@@ -106,6 +106,18 @@
             app:layout_constraintBottom_toBottomOf="@id/timeImage"
             />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/genreRv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/ratingImage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
         <TextView
             android:id="@+id/watch"
             android:layout_width="0dp"
@@ -117,7 +129,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginEnd="@dimen/_10sdp"
             android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/ratingImage"
+            app:layout_constraintTop_toBottomOf="@id/genreRv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             />

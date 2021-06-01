@@ -1,4 +1,4 @@
-package com.henryudorji.theater.data.model.detail.movie
+package com.henryudorji.theater.data.model.detail
 
 
 import com.google.gson.annotations.SerializedName

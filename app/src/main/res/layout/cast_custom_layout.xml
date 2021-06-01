@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_100sdp"
+    android:layout_margin="@dimen/_5sdp"
+    android:layout_height="wrap_content"
+    android:id="@+id/rootLayout"
+    android:background="@color/app_background_color">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/castImage"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/castName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Keanu Reaves"
+        android:textAlignment="center"
+        android:scrollHorizontally="true"
+        android:textColor="@color/white"
+        android:fontFamily="@font/raleway_regular"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@id/castImage"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
