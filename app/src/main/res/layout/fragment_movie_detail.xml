@@ -1,390 +1,444 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    android:layout_height="match_parent"
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:scrollbars="none"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/app_background_color"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!--SHIMMER LAYOUT-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/shimmerLayout"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:background="@color/app_background_color">
+        android:visibility="gone"
+        android:scrollbars="none">
 
-        <io.github.florent37.shapeofview.shapes.ArcView
-            android:id="@+id/arcView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            android:background="@color/app_background_color">
 
-            <FrameLayout
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/detailShimmer"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:background="@color/app_background_color"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <ImageView
-                    android:id="@+id/barImage"
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/details_shimmer_effect_placeholder"/>
+                    <include layout="@layout/details_shimmer_effect_placeholder"/>
+                    <include layout="@layout/details_shimmer_effect_placeholder"/>
+                    <include layout="@layout/details_shimmer_effect_placeholder"/>
+                    <include layout="@layout/details_shimmer_effect_placeholder"/>
+                </LinearLayout>
+            </com.facebook.shimmer.ShimmerFrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!--NORMAL LAYOUT-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/normalLayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/_10sdp"
+            android:background="@color/app_background_color">
+
+            <io.github.florent37.shapeofview.shapes.ArcView
+                android:id="@+id/arcView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/barImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:adjustViewBounds="true"/>
+
+                    <ImageView
+                        android:id="@+id/backBtn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:src="@drawable/ic_back"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:layout_marginStart="@dimen/_10sdp"/>
+                </FrameLayout>
+
+            </io.github.florent37.shapeofview.shapes.ArcView>
+
+            <TextView
+                android:id="@+id/movieTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                style="@style/TitleTextStyle"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/arcView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/ratingImage"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_star"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/movieTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/ratingText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:fontFamily="@font/raleway_regular"
+                android:text="4.5/10"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toEndOf="@id/ratingImage"
+                app:layout_constraintTop_toTopOf="@id/ratingImage"
+                app:layout_constraintBottom_toBottomOf="@id/ratingImage"
+                />
+
+            <ImageView
+                android:id="@+id/timeImage"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_time"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintStart_toEndOf="@id/ratingText"
+                app:layout_constraintTop_toTopOf="@id/ratingText"
+                app:layout_constraintBottom_toBottomOf="@id/ratingText"
+                />
+
+            <TextView
+                android:id="@+id/runtime_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_regular"
+                android:text="90 minutes"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toEndOf="@id/timeImage"
+                app:layout_constraintTop_toTopOf="@id/timeImage"
+                app:layout_constraintBottom_toBottomOf="@id/timeImage"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/genreRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/budgetText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/budgetText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Budget: $100000"
+                android:fontFamily="@font/raleway_regular"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/gray"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/ratingImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/revenueText"
+                />
+
+            <TextView
+                android:id="@+id/revenueText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Revenue: $100000"
+                android:fontFamily="@font/raleway_regular"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/gray"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/ratingImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/budgetText"
+                />
+
+            <TextView
+                android:id="@+id/seasonText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Seasons: 10"
+                android:fontFamily="@font/raleway_regular"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/gray"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/ratingImage"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/revenueText"
+                />
+
+            <TextView
+                android:id="@+id/episodeText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Episode: 90"
+                android:fontFamily="@font/raleway_regular"
+                android:textSize="@dimen/_11ssp"
+                android:textColor="@color/gray"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/ratingImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/budgetText"
+                />
+
+
+            <TextView
+                android:id="@+id/watch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="watch"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_13ssp"
+                android:fontFamily="@font/raleway_regular"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/genreRv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/videoRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/watch"
+                />
+
+            <io.github.florent37.shapeofview.shapes.RoundRectView
+                android:id="@+id/roundRectView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_150sdp"
+                app:shape_roundRect_topLeftRadius="@dimen/_10sdp"
+                app:shape_roundRect_topRightRadius="@dimen/_10sdp"
+                app:shape_roundRect_bottomRightRadius="@dimen/_10sdp"
+                app:shape_roundRect_bottomLeftRadius="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/watch">
+
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtubePlayerView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:adjustViewBounds="true"/>
+                    app:autoPlay="false"
+                    app:showFullScreenButton="false" />
+            </io.github.florent37.shapeofview.shapes.RoundRectView>
 
-                <ImageView
-                    android:id="@+id/backBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:src="@drawable/ic_back"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginStart="@dimen/_10sdp"/>
-            </FrameLayout>
+            <TextView
+                android:id="@+id/storyLineText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="StoryLine"
+                style="@style/TitleTextStyle"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/roundRectView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
-        </io.github.florent37.shapeofview.shapes.ArcView>
+            <TextView
+                android:id="@+id/movieOverviewText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="lorem ipsum"
+                android:textColor="@color/gray"
+                android:fontFamily="@font/raleway_regular"
+                android:textSize="@dimen/_11ssp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/storyLineText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
-        <TextView
-            android:id="@+id/movieTitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name"
-            style="@style/TitleTextStyle"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/arcView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            <TextView
+                android:id="@+id/castText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Cast"
+                style="@style/TitleTextStyle"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/movieOverviewText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/showAllCastText"
+                />
 
-        <ImageView
-            android:id="@+id/ratingImage"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_star"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/movieTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/ratingText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_2sdp"
-            android:fontFamily="@font/raleway_regular"
-            android:text="4.5/10"
-            android:textSize="@dimen/_11ssp"
-            android:textColor="@color/gray"
-            app:layout_constraintStart_toEndOf="@id/ratingImage"
-            app:layout_constraintTop_toTopOf="@id/ratingImage"
-            app:layout_constraintBottom_toBottomOf="@id/ratingImage"
-            />
-
-        <ImageView
-            android:id="@+id/timeImage"
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:src="@drawable/ic_time"
-            android:layout_marginStart="@dimen/_20sdp"
-            app:layout_constraintStart_toEndOf="@id/ratingText"
-            app:layout_constraintTop_toTopOf="@id/ratingText"
-            app:layout_constraintBottom_toBottomOf="@id/ratingText"
-            />
-
-        <TextView
-            android:id="@+id/timeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_regular"
-            android:text="90 minutes"
-            android:layout_marginStart="@dimen/_2sdp"
-            android:textSize="@dimen/_11ssp"
-            android:textColor="@color/gray"
-            app:layout_constraintStart_toEndOf="@id/timeImage"
-            app:layout_constraintTop_toTopOf="@id/timeImage"
-            app:layout_constraintBottom_toBottomOf="@id/timeImage"
-            />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/genreRv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/budgetText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/budgetText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Budget: $100000"
-            android:fontFamily="@font/raleway_regular"
-            android:textSize="@dimen/_11ssp"
-            android:textColor="@color/gray"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/ratingImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/revenueText"
-            />
-
-        <TextView
-            android:id="@+id/revenueText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Revenue: $100000"
-            android:fontFamily="@font/raleway_regular"
-            android:textSize="@dimen/_11ssp"
-            android:textColor="@color/gray"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/ratingImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/budgetText"
-            />
-
-        <TextView
-            android:id="@+id/seasonText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Seasons: 10"
-            android:fontFamily="@font/raleway_regular"
-            android:textSize="@dimen/_11ssp"
-            android:textColor="@color/gray"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/ratingImage"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/revenueText"
-            />
-
-        <TextView
-            android:id="@+id/episodeText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Episode: 90"
-            android:fontFamily="@font/raleway_regular"
-            android:textSize="@dimen/_11ssp"
-            android:textColor="@color/gray"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/ratingImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/budgetText"
-            />
+            <TextView
+                android:id="@+id/showAllCastText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/raleway_regular"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/show_all"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/castText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/castText"
+                app:layout_constraintTop_toTopOf="@+id/castText"
+                />
 
 
-        <TextView
-            android:id="@+id/watch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="watch"
-            android:textColor="@color/red"
-            android:textSize="@dimen/_13ssp"
-            android:fontFamily="@font/raleway_regular"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/genreRv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/videoRv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/watch"
-            />
-
-        <io.github.florent37.shapeofview.shapes.RoundRectView
-            android:id="@+id/roundRectView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_150sdp"
-            app:shape_roundRect_topLeftRadius="@dimen/_10sdp"
-            app:shape_roundRect_topRightRadius="@dimen/_10sdp"
-            app:shape_roundRect_bottomRightRadius="@dimen/_10sdp"
-            app:shape_roundRect_bottomLeftRadius="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/watch">
-
-            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                android:id="@+id/youtubePlayerView"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/castRv"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:autoPlay="false"
-                app:showFullScreenButton="false" />
-        </io.github.florent37.shapeofview.shapes.RoundRectView>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/castText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
-        <TextView
-            android:id="@+id/storyLineText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="StoryLine"
-            style="@style/TitleTextStyle"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/roundRectView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            <TextView
+                android:id="@+id/recommendedText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recommended"
+                style="@style/TitleTextStyle"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/castRv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
-        <TextView
-            android:id="@+id/movieOverviewText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="lorem ipsum"
-            android:textColor="@color/gray"
-            android:fontFamily="@font/raleway_regular"
-            android:textSize="@dimen/_11ssp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/storyLineText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recommendedRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/recommendedText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-        <TextView
-            android:id="@+id/castText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Cast"
-            style="@style/TitleTextStyle"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/movieOverviewText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/showAllCastText"
-            />
+            <TextView
+                android:id="@+id/reviewText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Reviews"
+                style="@style/TitleTextStyle"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/recommendedRv"
+                app:layout_constraintEnd_toStartOf="@id/showAllReviewsText"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
-        <TextView
-            android:id="@+id/showAllCastText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:fontFamily="@font/raleway_regular"
-            android:padding="@dimen/_10sdp"
-            android:text="@string/show_all"
-            android:textColor="@color/red"
-            android:textSize="@dimen/_10ssp"
-            app:layout_constraintBottom_toBottomOf="@+id/castText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/castText"
-            app:layout_constraintTop_toTopOf="@+id/castText"
-            />
+            <TextView
+                android:id="@+id/totalReviewText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="2K reviews"
+                android:fontFamily="@font/raleway_regular"
+                android:textColor="@color/gray"
+                android:textSize="@dimen/_11ssp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/reviewText"
+                app:layout_constraintEnd_toStartOf="@id/showAllReviewsText"
+                app:layout_constraintStart_toStartOf="parent"
+                />
 
+            <TextView
+                android:id="@+id/showAllReviewsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:fontFamily="@font/raleway_regular"
+                android:padding="@dimen/_10sdp"
+                android:text="@string/show_all"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_10ssp"
+                app:layout_constraintBottom_toBottomOf="@+id/totalReviewText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/reviewText"
+                app:layout_constraintTop_toTopOf="@+id/reviewText"
+                />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/castRv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/castText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviewRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/totalReviewText"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
 
-        <TextView
-            android:id="@+id/recommendedText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Recommended"
-            style="@style/TitleTextStyle"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/castRv"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recommendedRv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/recommendedText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <TextView
-            android:id="@+id/reviewText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Reviews"
-            style="@style/TitleTextStyle"
-            android:layout_marginTop="@dimen/_15sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/recommendedRv"
-            app:layout_constraintEnd_toStartOf="@id/showAllReviewsText"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/totalReviewText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="2K reviews"
-            android:fontFamily="@font/raleway_regular"
-            android:textColor="@color/gray"
-            android:textSize="@dimen/_11ssp"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/reviewText"
-            app:layout_constraintEnd_toStartOf="@id/showAllReviewsText"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-
-        <TextView
-            android:id="@+id/showAllReviewsText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:fontFamily="@font/raleway_regular"
-            android:padding="@dimen/_10sdp"
-            android:text="@string/show_all"
-            android:textColor="@color/red"
-            android:textSize="@dimen/_10ssp"
-            app:layout_constraintBottom_toBottomOf="@+id/totalReviewText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/reviewText"
-            app:layout_constraintTop_toTopOf="@+id/reviewText"
-            />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reviewRv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            app:layout_constraintTop_toBottomOf="@id/totalReviewText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>

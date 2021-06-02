@@ -18,11 +18,9 @@ import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentMovieListBinding
 import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
-import com.henryudorji.theater.utils.Constants
 import com.henryudorji.theater.utils.Constants.FRAG_ID
 import com.henryudorji.theater.utils.Constants.LATEST
 import com.henryudorji.theater.utils.Constants.MOVIE
-import com.henryudorji.theater.utils.Constants.MOVIE_DATA
 import com.henryudorji.theater.utils.Constants.MOVIE_ID
 import com.henryudorji.theater.utils.Constants.POPULAR
 import com.henryudorji.theater.utils.Constants.QUERY_PAGE_SIZE
@@ -54,7 +52,7 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
         binding = FragmentMovieListBinding.bind(view)
 
         movieCategory = args.moviecategory
-        //fragID = args.
+        fragID = args.fragid
         movieRepository = (activity as MainActivity).movieRepository
 
         initViews()
@@ -69,11 +67,11 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
         try {
             if (ConnectionManager.hasInternetConnection(requireContext())) {
                 val moviesData = when (movieCategory) {
-                    POPULAR -> if (fragID == 1) movieRepository.getPopularMovies(moviePage) else movieRepository.getPopularTvSeries(moviePage)
-                    TOP_RATED -> if (fragID == 1) movieRepository.getTopRatedMovies(moviePage) else movieRepository.getTopRatedMovies(moviePage)
-                    TRENDING -> if (fragID == 1) movieRepository.getTrendingMovies(moviePage) else movieRepository.getTrendingTvSeries(moviePage)
+                    POPULAR -> if (fragID == MOVIE) movieRepository.getPopularMovies(moviePage) else movieRepository.getPopularTvSeries(moviePage)
+                    TOP_RATED -> if (fragID == MOVIE) movieRepository.getTopRatedMovies(moviePage) else movieRepository.getTopRatedMovies(moviePage)
+                    TRENDING -> if (fragID == MOVIE) movieRepository.getTrendingMovies(moviePage) else movieRepository.getTrendingTvSeries(moviePage)
                     UPCOMING -> movieRepository.getUpcomingMovies(moviePage)
-                    LATEST -> movieRepository.getLatestTvSeries(moviePage)
+                    LATEST -> movieRepository.getOnTheAir(moviePage)
                     else -> movieRepository.getPopularMovies(moviePage)
                 }
 
@@ -168,16 +166,16 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
                 putInt(MOVIE_ID, movieID)
                 putInt(FRAG_ID, fragID)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+            findNavController().navigate(R.id.action_movieListFragment_to_movieDetailFragment, bundle)
         }
 
     }
 
     private fun getTitle(): String {
         return when(movieCategory) {
-            POPULAR -> if (fragID == 1) "Popular Movies" else "Popular TvSeries"
-            TOP_RATED -> if (fragID == 1) "TopRated Movies" else "TopRated TvSeries"
-            TRENDING -> if (fragID == 1) "Trending Movies" else "Trending TvSeries"
+            POPULAR -> if (fragID == MOVIE) "Popular Movies" else "Popular TvSeries"
+            TOP_RATED -> if (fragID == MOVIE) "TopRated Movies" else "TopRated TvSeries"
+            TRENDING -> if (fragID == MOVIE) "Trending Movies" else "Trending TvSeries"
             UPCOMING -> "Upcoming Movies"
             LATEST -> "Latest TvSeries"
             else -> ""

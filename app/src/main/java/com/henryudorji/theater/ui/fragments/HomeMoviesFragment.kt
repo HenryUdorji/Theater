@@ -131,21 +131,21 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 putInt(MOVIE_ID, movies[0].id)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieDetailFragment, bundle)
         }
         binding.secondImage.setOnClickListener {
             val bundle = Bundle().apply {
                 putInt(MOVIE_ID, movies[1].id)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieDetailFragment, bundle)
         }
         binding.thirdImage.setOnClickListener {
             val bundle = Bundle().apply {
                 putInt(MOVIE_ID, movies[2].id)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieDetailFragment, bundle)
         }
     }
 
@@ -166,7 +166,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
             normalLayout.visibility = View.VISIBLE
             shimmerLayout.visibility = View.GONE
             popularShimmerFrame.stopShimmer()
-            newMoviesShimmer.stopShimmer()
+            upcomingMoviesShimmer.stopShimmer()
             topRatedMoviesShimmer.stopShimmer()
             trendingMoviesShimmer.stopShimmer()
             swipeShimmer.stopShimmer()
@@ -178,7 +178,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
             normalLayout.visibility = View.GONE
             shimmerLayout.visibility = View.VISIBLE
             popularShimmerFrame.startShimmer()
-            newMoviesShimmer.startShimmer()
+            upcomingMoviesShimmer.startShimmer()
             topRatedMoviesShimmer.startShimmer()
             trendingMoviesShimmer.startShimmer()
             swipeShimmer.startShimmer()
@@ -192,7 +192,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
         topRatedAdapter = MovieRecyclerAdapter()
         trendingAdapter = MovieRecyclerAdapter()
 
-        binding.popularRecyclerView.apply {
+        binding.popularRv.apply {
             adapter = popularAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false).also {
                 hasFixedSize()
@@ -203,10 +203,10 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 putInt(MOVIE_ID, movieID)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieDetailFragment, bundle)
         }
 
-        binding.latestRecyclerView.apply {
+        binding.upcomingRv.apply {
             adapter = upcomingAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false).also {
                 hasFixedSize()
@@ -217,10 +217,10 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 putInt(MOVIE_ID, movieID)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieDetailFragment, bundle)
         }
 
-        binding.topRatedMoviesRecyclerView.apply {
+        binding.topRatedRv.apply {
             adapter = topRatedAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false).also {
                 hasFixedSize()
@@ -231,10 +231,10 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 putInt(MOVIE_ID, movieID)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieDetailFragment, bundle)
         }
 
-        binding.trendingMoviesRecyclerView.apply {
+        binding.trendingRv.apply {
             adapter = trendingAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false).also {
                 hasFixedSize()
@@ -245,7 +245,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 putInt(MOVIE_ID, movieID)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieDetailFragment, bundle)
         }
 
 
@@ -254,7 +254,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 putString(MOVIE_CATEGORY, POPULAR)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieListFragment, bundle)
         }
 
         binding.showAllUpcomingMoviesText.setOnClickListener {
@@ -262,7 +262,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 putString(MOVIE_CATEGORY, UPCOMING)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieListFragment, bundle)
         }
 
         binding.showAllTopRatedMoviesText.setOnClickListener {
@@ -270,7 +270,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 putString(MOVIE_CATEGORY, TOP_RATED)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieListFragment, bundle)
         }
 
         binding.showAllTrendingMoviesText.setOnClickListener {
@@ -278,7 +278,7 @@ class HomeMoviesFragment: Fragment(R.layout.fragment_home_detail) {
                 putString(MOVIE_CATEGORY, TRENDING)
                 putInt(FRAG_ID, MOVIE)
             }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            findNavController().navigate(R.id.action_homeMoviesFragment_to_movieListFragment, bundle)
         }
     }
 

@@ -104,7 +104,7 @@
             </com.facebook.shimmer.ShimmerFrameLayout>
 
             <TextView
-                android:id="@+id/newMoviesTexts"
+                android:id="@+id/upcomingMoviesTexts"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/upcoming_movies"
@@ -125,20 +125,20 @@
                 android:fontFamily="@font/raleway_regular"
                 android:textColor="@color/red"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@id/newMoviesShimmer"
+                app:layout_constraintBottom_toTopOf="@id/upcomingMoviesShimmer"
                 app:layout_constraintTop_toBottomOf="@id/popularShimmerFrame"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/newMoviesTexts"/>
+                app:layout_constraintStart_toEndOf="@id/upcomingMoviesTexts"/>
 
 
             <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/newMoviesShimmer"
+                android:id="@+id/upcomingMoviesShimmer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/app_background_color"
-                app:layout_constraintTop_toBottomOf="@id/newMoviesTexts"
+                app:layout_constraintTop_toBottomOf="@id/upcomingMoviesTexts"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -163,7 +163,7 @@
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/newMoviesShimmer"
+                app:layout_constraintTop_toBottomOf="@id/upcomingMoviesShimmer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/showAllTopRatedMoviesTexts"/>
 
@@ -177,7 +177,7 @@
                 android:textColor="@color/red"
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@id/topRatedMoviesShimmer"
-                app:layout_constraintTop_toBottomOf="@id/newMoviesShimmer"
+                app:layout_constraintTop_toBottomOf="@id/upcomingMoviesShimmer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/topRatedMoviesTexts"/>
 
@@ -356,7 +356,7 @@
                 android:fontFamily="@font/raleway_regular"
                 android:textColor="@color/red"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@id/popularRecyclerView"
+                app:layout_constraintBottom_toTopOf="@id/popularRv"
                 app:layout_constraintTop_toBottomOf="@id/swipeViewFlipper"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/popularMoviesText"/>
@@ -364,7 +364,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/popularRecyclerView"
+                android:id="@+id/popularRv"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/popularMoviesText"
@@ -372,7 +372,7 @@
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
-                android:id="@+id/newMoviesText"
+                android:id="@+id/upcomingMoviesText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/upcoming_movies"
@@ -380,7 +380,7 @@
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/popularRecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/popularRv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/show_all_upcoming_movies_text"/>
 
@@ -393,18 +393,18 @@
                 android:fontFamily="@font/raleway_regular"
                 android:textColor="@color/red"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@id/latest_recycler_view"
-                app:layout_constraintTop_toBottomOf="@id/popularRecyclerView"
+                app:layout_constraintBottom_toTopOf="@id/upcomingRv"
+                app:layout_constraintTop_toBottomOf="@id/popularRv"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/newMoviesText"/>
+                app:layout_constraintStart_toEndOf="@id/upcomingMoviesText"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/latest_recycler_view"
+                android:id="@+id/upcomingRv"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/newMoviesText"
+                app:layout_constraintTop_toBottomOf="@id/upcomingMoviesText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -418,7 +418,7 @@
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/latest_recycler_view"
+                app:layout_constraintTop_toBottomOf="@id/upcomingRv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/showAllTopRatedMoviesText"/>
 
@@ -431,15 +431,15 @@
                 android:fontFamily="@font/raleway_regular"
                 android:textColor="@color/red"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@id/topRatedMoviesRecyclerView"
-                app:layout_constraintTop_toBottomOf="@id/latest_recycler_view"
+                app:layout_constraintBottom_toTopOf="@id/topRatedRv"
+                app:layout_constraintTop_toBottomOf="@id/upcomingRv"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/topRatedMoviesText"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/topRatedMoviesRecyclerView"
+                android:id="@+id/topRatedRv"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/topRatedMoviesText"
@@ -456,7 +456,7 @@
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/topRatedMoviesRecyclerView"
+                app:layout_constraintTop_toBottomOf="@id/topRatedRv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/showAllTrendingMoviesText"/>
 
@@ -477,7 +477,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/trendingMoviesRecyclerView"
+                android:id="@+id/trendingRv"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/topRatedMoviesText"

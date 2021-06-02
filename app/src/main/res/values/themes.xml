@@ -26,4 +26,10 @@
         <item name="textAllCaps">true</item>
         <item name="android:textColor">@color/white</item>
     </style>
+
+    <style name="ToolbarTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="fontFamily">@font/raleway_bold</item>
+        <item name="android:textSize">@dimen/_15ssp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>

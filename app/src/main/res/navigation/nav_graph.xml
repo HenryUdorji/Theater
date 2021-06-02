@@ -1,28 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/homeMoviesFragment">
 
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.henryudorji.theater.ui.fragments.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_movieDetailFragment"
-            app:destination="@id/movieDetailFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_movieListFragment"
-            app:destination="@id/movieListFragment" />
-    </fragment>
     <fragment
         android:id="@+id/movieListFragment"
         android:name="com.henryudorji.theater.ui.fragments.MovieListFragment"
         android:label="MovieListFragment" >
-        <action
-            android:id="@+id/action_movieListFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/movieListFragment"
-            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_movieListFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
@@ -39,16 +23,6 @@
         android:id="@+id/movieDetailFragment"
         android:name="com.henryudorji.theater.ui.fragments.MovieDetailFragment"
         android:label="MovieDetailFragment" >
-        <action
-            android:id="@+id/action_movieDetailFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/movieDetailFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_movieDetailFragment_to_movieListFragment"
-            app:destination="@id/movieListFragment"
-            app:popUpTo="@id/movieDetailFragment"
-            app:popUpToInclusive="true" />
         <argument
             android:name="MOVIE_ID"
             app:argType="integer"
@@ -57,5 +31,35 @@
             android:name="FRAG_ID"
             app:argType="integer"
             android:defaultValue="1" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeTvSeriesFragment"
+        android:name="com.henryudorji.theater.ui.fragments.HomeTvSeriesFragment"
+        android:label="HomeTvSeriesFragment" >
+        <action
+            android:id="@+id/action_homeTvSeriesFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
+        <action
+            android:id="@+id/action_homeTvSeriesFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeSearchFragment"
+        android:name="com.henryudorji.theater.ui.fragments.HomeSearchFragment"
+        android:label="HomeSearchFragment" >
+        <action
+            android:id="@+id/action_homeSearchFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeMoviesFragment"
+        android:name="com.henryudorji.theater.ui.fragments.HomeMoviesFragment"
+        android:label="HomeMoviesFragment" >
+        <action
+            android:id="@+id/action_homeMoviesFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_homeMoviesFragment_to_movieListFragment"
+            app:destination="@id/movieListFragment" />
     </fragment>
 </navigation>
