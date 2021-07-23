@@ -1,4 +1,4 @@
-package com.henryudorji.theater.ui.fragments
+package com.henryudorji.theater.ui.details
 
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +14,7 @@ import com.henryudorji.theater.adapters.MovieRecyclerAdapter
 import com.henryudorji.theater.adapters.ReviewRecyclerAdapter
 import com.henryudorji.theater.data.model.detail.Genre
 import com.henryudorji.theater.data.model.detail.MovieDetailResponse
-import com.henryudorji.theater.data.model.detail.tvseries.TvSeriesDetailResponse
+import com.henryudorji.theater.data.model.detail.TvSeriesDetailResponse
 import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentMovieDetailBinding
 import com.henryudorji.theater.ui.main.MainActivity
@@ -23,7 +23,6 @@ import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
 import com.henryudorji.theater.utils.Constants.MOVIE
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -150,7 +149,9 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
             binding.ratingText.text = tvData?.voteAverage.toString()
             binding.runtimeText.text = "${tvData?.episodeRunTime.toString()} minutes"
             genreList = tvData?.genres!!
-            binding.movieOverviewText.text = tvData?.overview
+            binding.movieOverviewText.text = tvData.overview
+            binding.seasonText.text = "Seasons: ${tvData.numberOfSeasons}"
+            binding.episodeText.text = "Episodes: ${tvData.numberOfEpisodes}"
         }else {
             Picasso.get().load(BASE_URL_IMAGE + movieData.posterPath).into(binding.barImage)
             binding.movieTitle.text = movieData.title
@@ -158,6 +159,8 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
             binding.runtimeText.text = "${movieData.runtime} minutes"
             genreList = movieData.genres
             binding.movieOverviewText.text = movieData.overview
+            binding.budgetText.text = "Budget: ${movieData.budget}"
+            binding.revenueText.text = "Revenue: ${movieData.revenue}"
         }
         genreRecyclerAdapter.differ.submitList(genreList)
     }
@@ -185,13 +188,13 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
                 is IOException -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.network_fail_msg))
-                        Log.e(TAG, "getMoviesData: ${t.message}")
+                        Log.e(TAG, "getReview: ${t.message}")
                     }
                 }
                 else -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.conversion_error_msg))
-                        Log.e(TAG, "getMoviesData: ${t.message}")
+                        Log.e(TAG, "getReview: ${t.message}")
                     }
                 }
             }
@@ -221,13 +224,13 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
                 is IOException -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.network_fail_msg))
-                        Log.e(TAG, "getMoviesData: ${t.message}")
+                        Log.e(TAG, "getRecommendation: ${t.message}")
                     }
                 }
                 else -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.conversion_error_msg))
-                        Log.e(TAG, "getMoviesData: ${t.message}")
+                        Log.e(TAG, "getRecommendation: ${t.message}")
                     }
                 }
             }
@@ -257,13 +260,13 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
                 is IOException -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.network_fail_msg))
-                        Log.e(TAG, "getMoviesData: ${t.message}")
+                        Log.e(TAG, "getCast: ${t.message}")
                     }
                 }
                 else -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.conversion_error_msg))
-                        Log.e(TAG, "getMoviesData: ${t.message}")
+                        Log.e(TAG, "getCast: ${t.message}")
                     }
                 }
             }
@@ -304,13 +307,13 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
                 is IOException -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.network_fail_msg))
-                        Log.e(TAG, "getMoviesData: ${t.message}")
+                        Log.e(TAG, "getVideo: ${t.message}")
                     }
                 }
                 else -> {
                     withContext(Dispatchers.Main) {
                         showNoNetworkSnackBar(getString(R.string.conversion_error_msg))
-                        Log.e(TAG, "getMoviesData: ${t.message}")
+                        Log.e(TAG, "getVideo: ${t.message}")
                     }
                 }
             }

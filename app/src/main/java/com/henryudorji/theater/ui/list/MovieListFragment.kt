@@ -1,4 +1,4 @@
-package com.henryudorji.theater.ui.fragments
+package com.henryudorji.theater.ui.list
 
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +19,7 @@ import com.henryudorji.theater.databinding.FragmentMovieListBinding
 import com.henryudorji.theater.ui.main.MainActivity
 import com.henryudorji.theater.utils.ConnectionManager
 import com.henryudorji.theater.utils.Constants.FRAG_ID
-import com.henryudorji.theater.utils.Constants.LATEST
+import com.henryudorji.theater.utils.Constants.ON_THE_AIR
 import com.henryudorji.theater.utils.Constants.MOVIE
 import com.henryudorji.theater.utils.Constants.MOVIE_ID
 import com.henryudorji.theater.utils.Constants.POPULAR
@@ -69,9 +69,8 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
                 val moviesData = when (movieCategory) {
                     POPULAR -> if (fragID == MOVIE) movieRepository.getPopularMovies(moviePage) else movieRepository.getPopularTvSeries(moviePage)
                     TOP_RATED -> if (fragID == MOVIE) movieRepository.getTopRatedMovies(moviePage) else movieRepository.getTopRatedMovies(moviePage)
-                    TRENDING -> if (fragID == MOVIE) movieRepository.getTrendingMovies(moviePage) else movieRepository.getTrendingTvSeries(moviePage)
                     UPCOMING -> movieRepository.getUpcomingMovies(moviePage)
-                    LATEST -> movieRepository.getOnTheAir(moviePage)
+                    ON_THE_AIR -> movieRepository.getOnTheAir(moviePage)
                     else -> movieRepository.getPopularMovies(moviePage)
                 }
 
@@ -177,7 +176,7 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
             TOP_RATED -> if (fragID == MOVIE) "TopRated Movies" else "TopRated TvSeries"
             TRENDING -> if (fragID == MOVIE) "Trending Movies" else "Trending TvSeries"
             UPCOMING -> "Upcoming Movies"
-            LATEST -> "Latest TvSeries"
+            ON_THE_AIR -> "On The Air TvSeries"
             else -> ""
         }
     }

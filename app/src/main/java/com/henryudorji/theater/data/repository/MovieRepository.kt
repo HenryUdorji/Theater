@@ -17,9 +17,6 @@ class MovieRepository() {
     suspend fun getNowPlayingMovies(page: Int) = ServiceGenerator.api.getNowPlayingMovies(page)
     suspend fun getAiringTodayTvSeries(page: Int) = ServiceGenerator.api.getAiringTodayTvSeries(page)
 
-    suspend fun getTrendingMovies(page: Int) = ServiceGenerator.api.getTrendingMovies(page)
-    suspend fun getTrendingTvSeries(page: Int) = ServiceGenerator.api.getTrendingTvSeries(page)
-
     suspend fun getMovieDetails(movieID: Int) = ServiceGenerator.api.getMovieDetail(movieID)
     suspend fun getTvSeriesDetails(movieID: Int) = ServiceGenerator.api.getTvSeriesDetail(movieID)
 

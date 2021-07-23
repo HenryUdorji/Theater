@@ -44,3 +44,11 @@ fun View.showSnackBar(message: String, duration: Int = SNACKBAR_LENGHT_SHORT) {
     }
 
 }
+
+fun View.show() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.hide() {
+    this.visibility = View.GONE
+}

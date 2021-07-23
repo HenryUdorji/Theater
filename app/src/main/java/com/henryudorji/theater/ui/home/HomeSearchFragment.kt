@@ -1,4 +1,4 @@
-package com.henryudorji.theater.ui.fragments
+package com.henryudorji.theater.ui.home
 
 import android.os.Bundle
 import android.view.View

@@ -22,6 +22,16 @@
             android:paddingBottom="@dimen/_5sdp"
             android:background="@color/app_background_color">
 
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/shimmerBar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/app_background_color"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/detailShimmer"
                 android:layout_width="match_parent"
@@ -29,7 +39,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:background="@color/app_background_color"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerBar"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
@@ -67,6 +77,8 @@
                 android:id="@+id/arcView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
+                app:shape_arc_position="bottom"
+                app:shape_arc_height="@dimen/_25sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -79,7 +91,7 @@
                         android:id="@+id/barImage"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="fitXY"
+                        android:scaleType="centerCrop"
                         android:adjustViewBounds="true"/>
 
                     <ImageView

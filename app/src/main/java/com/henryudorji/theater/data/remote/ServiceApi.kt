@@ -3,7 +3,7 @@ package com.henryudorji.theater.data.remote
 import com.henryudorji.theater.data.model.MovieResponse
 import com.henryudorji.theater.data.model.cast.CastResponse
 import com.henryudorji.theater.data.model.detail.MovieDetailResponse
-import com.henryudorji.theater.data.model.detail.tvseries.TvSeriesDetailResponse
+import com.henryudorji.theater.data.model.detail.TvSeriesDetailResponse
 import com.henryudorji.theater.data.model.review.ReviewResponse
 import com.henryudorji.theater.data.model.video.VideoResponse
 import com.henryudorji.theater.utils.Constants.API_KEY
@@ -124,10 +124,10 @@ interface ServiceApi {
 
     @GET("tv/{tv_id}/reviews?api_key=$API_KEY&language=en-US")
     suspend fun getTvSeriesReviews(
-            @Query("page")
-            page: Int = 1,
             @Path("tv_id")
-            tvId: Int
+            tvId: Int,
+            @Query("page")
+            page: Int = 1
     ): Response<ReviewResponse>
 
     @GET("tv/{tv_id}/videos?api_key=$API_KEY&language=en-US")
@@ -143,21 +143,6 @@ interface ServiceApi {
     ): Response<MovieResponse>
 
     //TV_SERIES API - END
-
-    //TRENDING API
-    @GET("trending/movie/day?api_key=$API_KEY&language=en-US")
-    suspend fun getTrendingMovies(
-            @Query("page")
-            page: Int = 1
-    ): Response<MovieResponse>
-
-    @GET("trending/tv/day?api_key=$API_KEY&language=en-US")
-    suspend fun getTrendingTvSeries(
-            @Query("page")
-            page: Int = 1
-    ): Response<MovieResponse>
-
-    //TRENDING API - END
 
 
     //SEARCH API - START

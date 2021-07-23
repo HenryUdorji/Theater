@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:title="Theater"
-            style="@style/ToolbarTextStyle"
+            android:theme="@style/ToolbarTextStyle"
             android:background="@color/app_background_color"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"

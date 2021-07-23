@@ -1,4 +1,4 @@
-package com.henryudorji.theater.utils
+package com.henryudorji.theater.utils.resource
 
 //
 // Created by hash on 5/2/2021.

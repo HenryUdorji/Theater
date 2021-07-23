@@ -7,10 +7,10 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.lifecycle.*
 import com.henryudorji.theater.R
-import com.henryudorji.theater.base.BaseApplication
 import com.henryudorji.theater.data.model.MovieResponse
 import com.henryudorji.theater.data.repository.MovieRepository
-import com.henryudorji.theater.utils.Resource
+import com.henryudorji.theater.utils.resource.HomeResource
+import com.henryudorji.theater.utils.resource.Resource
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import java.io.IOException
@@ -20,31 +20,47 @@ import java.io.IOException
 //
 class MoviesViewModel(
         private val movieRepository: MovieRepository,
-        application: Application
-): AndroidViewModel(application) {
+        private val application: Application
+): ViewModel() {
 
     private var moviePage = 1
     private var movieResponseData: MovieResponse? = null
-    private var _movieResponse: MutableLiveData<Resource<MovieResponse>> = MutableLiveData()
-    val movieResponse: LiveData<Resource<MovieResponse>> = _movieResponse
 
-    init {
-        getMovies()
-    }
+    private var _popularMutableLiveData: MutableLiveData<Resource<MovieResponse>> = MutableLiveData()
+    val popularLiveData: LiveData<Resource<MovieResponse>> = _popularMutableLiveData
+
+    private var _topRatedMutableLiveData: MutableLiveData<Resource<MovieResponse>> = MutableLiveData()
+    val topRatedLiveData: LiveData<Resource<MovieResponse>> = _topRatedMutableLiveData
+
+    private var _upcomingOrOnTheAirMutableLiveData: MutableLiveData<Resource<MovieResponse>> = MutableLiveData()
+    val upcomingOrOnTheAirLiveData: LiveData<Resource<MovieResponse>> = _upcomingOrOnTheAirMutableLiveData
+
+    private var _nowPlayingOrAiringTodayMutableLiveData: MutableLiveData<Resource<MovieResponse>> = MutableLiveData()
+    val nowPlayingOrAiringTodayLiveData: LiveData<Resource<MovieResponse>> = _nowPlayingOrAiringTodayMutableLiveData
+
+
 
     fun getMovies() = viewModelScope.launch {
-        _movieResponse.postValue(Resource.Loading())
+        _popularMutableLiveData.postValue(Resource.Loading())
         try {
             if (hasInternetConnection()) {
-                val response = movieRepository.getPopularMovies(moviePage)
-                _movieResponse.postValue(handleMovieResponse(response))
+                val popularResponse = movieRepository.getPopularMovies(moviePage)
+                val topRatedResponse = movieRepository.getTopRatedMovies(moviePage)
+                val upcomingResponse = movieRepository.getUpcomingMovies(moviePage)
+                val nowPlayingResponse = movieRepository.getNowPlayingMovies(moviePage)
+
+                _popularMutableLiveData.postValue(handleMovieResponse(popularResponse))
+                _topRatedMutableLiveData.postValue(handleMovieResponse(topRatedResponse))
+                _upcomingOrOnTheAirMutableLiveData.postValue(handleMovieResponse(upcomingResponse))
+                _nowPlayingOrAiringTodayMutableLiveData.postValue(handleMovieResponse(nowPlayingResponse))
             }else {
-                _movieResponse.postValue(Resource.Error(getApplication<BaseApplication>().getString(R.string.connect_unavailable_msg)))
+                _popularMutableLiveData.postValue(Resource.Error(application.getString(R.string.connect_unavailable_msg)))
             }
         }catch (t: Throwable) {
             when(t) {
-                is IOException -> _movieResponse.postValue(Resource.Error(getApplication<BaseApplication>().getString(R.string.network_fail_msg)))
-                else -> _movieResponse.postValue(Resource.Error(getApplication<BaseApplication>().getString(R.string.conversion_error_msg)))
+                //If there is no Internet or an Exception occurred only one LiveData would post the error
+                is IOException -> _popularMutableLiveData.postValue(Resource.Error(application.getString(R.string.connect_unavailable_msg)))
+                else -> _popularMutableLiveData.postValue(Resource.Error(application.getString(R.string.connect_unavailable_msg)))
             }
         }
     }
@@ -67,7 +83,7 @@ class MoviesViewModel(
     }
 
     private fun hasInternetConnection(): Boolean {
-        val connectivityManager = getApplication<BaseApplication>().getSystemService(
+        val connectivityManager = application.getSystemService(
                 Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

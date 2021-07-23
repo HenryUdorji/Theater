@@ -13,7 +13,7 @@ object Constants {
     const val UPCOMING = "UPCOMING"
     const val TOP_RATED = "TOP_RATED"
     const val TRENDING = "TRENDING"
-    const val LATEST = "LATEST"
+    const val ON_THE_AIR = "ON_THE_AIR"
     const val MOVIE_DATA = "MOVIE_DATA"
 
 
