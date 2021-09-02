@@ -155,7 +155,6 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
             popularShimmerFrame.stopShimmer()
             upcomingMoviesShimmer.stopShimmer()
             topRatedMoviesShimmer.stopShimmer()
-            trendingMoviesShimmer.stopShimmer()
             swipeShimmer.stopShimmer()
         }
     }
@@ -167,7 +166,6 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
             popularShimmerFrame.startShimmer()
             upcomingMoviesShimmer.startShimmer()
             topRatedMoviesShimmer.startShimmer()
-            trendingMoviesShimmer.startShimmer()
             swipeShimmer.startShimmer()
         }
     }

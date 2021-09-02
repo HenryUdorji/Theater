@@ -57,8 +57,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRepository(
-        serviceApi: ServiceApi,
-        theaterDb: TheaterDb
+        serviceApi: ServiceApi
     ) = MovieRepository(serviceApi)
 
     @Provides

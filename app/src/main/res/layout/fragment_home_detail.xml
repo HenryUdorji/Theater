@@ -81,6 +81,7 @@
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
                 app:layout_constraintTop_toBottomOf="@id/swipeViewFlipper"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/showAllPopularText"/>
@@ -118,6 +119,7 @@
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/popularRv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/show_all_upcoming_movies_text"/>
@@ -156,6 +158,7 @@
                 android:fontFamily="@font/raleway_bold"
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/upcomingRv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/showAllTopRatedMoviesText"/>

@@ -20,6 +20,8 @@ interface TheaterDao {
 
     @Query("SELECT * FROM movie")
     fun getPopularMovies(): Flow<List<Movie>>
+    @Query("SELECT * FROM movie")
     fun getUpcomingMovies(): Flow<List<Movie>>
+    @Query("SELECT * FROM movie")
     fun getTopRatedMovies(): Flow<List<Movie>>
 }

@@ -2,6 +2,7 @@ package com.henryudorji.theater.data.model
 
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -9,6 +10,7 @@ import java.io.Serializable
 data class Movie(
     @SerializedName("backdrop_path")
     val backdropPath: String,
+    @PrimaryKey
     @SerializedName("id")
     val id: Int,
     @SerializedName("original_title")
