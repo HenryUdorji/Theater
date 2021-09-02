@@ -10,253 +10,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--SHIMMER LAYOUT-->
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/shimmerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:background="@color/app_background_color">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:background="@color/app_background_color"
-            xmlns:app="http://schemas.android.com/apk/res-auto">
-
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/swipeShimmer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@color/app_background_color"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <androidx.cardview.widget.CardView android:layout_width="match_parent"
-                    android:layout_height="@dimen/_170sdp"
-                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                    app:cardCornerRadius="@dimen/_10sdp"
-                    app:cardBackgroundColor="@color/app_background_color"
-                    app:cardElevation="@dimen/_10sdp">
-
-                    <ImageView
-                        android:id="@+id/swipeImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/shimmer_placeholder"/>
-                </androidx.cardview.widget.CardView>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
-
-            <TextView
-                android:id="@+id/popularMoviesTexts"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/popular_movies"
-                android:textSize="@dimen/_14ssp"
-                android:fontFamily="@font/raleway_bold"
-                android:textColor="@color/white"
-                android:padding="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/swipeShimmer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/showAllPopularTexts"/>
-
-            <TextView
-                android:id="@+id/showAllPopularTexts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/show_all"
-                android:textSize="@dimen/_10ssp"
-                android:fontFamily="@font/raleway_regular"
-                android:textColor="@color/red"
-                android:padding="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@id/popularShimmerFrame"
-                app:layout_constraintTop_toBottomOf="@id/swipeShimmer"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/popularMoviesTexts"/>
-
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/popularShimmerFrame"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@color/app_background_color"
-                app:layout_constraintTop_toBottomOf="@id/popularMoviesTexts"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                </LinearLayout>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
-
-            <TextView
-                android:id="@+id/upcomingMoviesTexts"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/upcoming_movies"
-                android:textSize="@dimen/_14ssp"
-                android:fontFamily="@font/raleway_bold"
-                android:textColor="@color/white"
-                android:padding="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/popularShimmerFrame"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/showAllNewMoviesTexts"/>
-
-            <TextView
-                android:id="@+id/showAllNewMoviesTexts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/show_all"
-                android:textSize="@dimen/_10ssp"
-                android:fontFamily="@font/raleway_regular"
-                android:textColor="@color/red"
-                android:padding="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@id/upcomingMoviesShimmer"
-                app:layout_constraintTop_toBottomOf="@id/popularShimmerFrame"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/upcomingMoviesTexts"/>
-
-
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/upcomingMoviesShimmer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@color/app_background_color"
-                app:layout_constraintTop_toBottomOf="@id/upcomingMoviesTexts"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                </LinearLayout>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
-
-            <TextView
-                android:id="@+id/topRatedMoviesTexts"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/top_rated"
-                android:textSize="@dimen/_14ssp"
-                android:fontFamily="@font/raleway_bold"
-                android:textColor="@color/white"
-                android:padding="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/upcomingMoviesShimmer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/showAllTopRatedMoviesTexts"/>
-
-            <TextView
-                android:id="@+id/showAllTopRatedMoviesTexts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/show_all"
-                android:textSize="@dimen/_10ssp"
-                android:fontFamily="@font/raleway_regular"
-                android:textColor="@color/red"
-                android:padding="@dimen/_10sdp"
-                app:layout_constraintBottom_toTopOf="@id/topRatedMoviesShimmer"
-                app:layout_constraintTop_toBottomOf="@id/upcomingMoviesShimmer"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/topRatedMoviesTexts"/>
-
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/topRatedMoviesShimmer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@color/app_background_color"
-                app:layout_constraintTop_toBottomOf="@id/topRatedMoviesTexts"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                </LinearLayout>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
-
-            <TextView
-                android:id="@+id/trendingMoviesTexts"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/trending_movies"
-                android:textSize="@dimen/_14ssp"
-                android:fontFamily="@font/raleway_bold"
-                android:textColor="@color/white"
-                android:padding="@dimen/_10sdp"
-                android:textAllCaps="true"
-                app:layout_constraintTop_toBottomOf="@id/topRatedMoviesShimmer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/showAllTrendingMoviesTexts"/>
-
-            <TextView
-                android:id="@+id/showAllTrendingMoviesTexts"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/show_all"
-                android:textSize="@dimen/_10ssp"
-                android:fontFamily="@font/raleway_regular"
-                android:textColor="@color/red"
-                android:padding="@dimen/_10sdp"
-                app:layout_constraintTop_toTopOf="@id/trendingMoviesTexts"
-                app:layout_constraintBottom_toBottomOf="@id/trendingMoviesTexts"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/trendingMoviesTexts"/>
-
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/trendingMoviesShimmer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@color/app_background_color"
-                app:layout_constraintTop_toBottomOf="@id/topRatedMoviesTexts"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                    <include layout="@layout/shimmer_effect_placeholder"/>
-                </LinearLayout>
-
-            </com.facebook.shimmer.ShimmerFrameLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+    <include
+        android:id="@+id/shimmer_include"
+        layout="@layout/shimmer_include_layout"/>
 
     <!--NORMAL LAYOUT-->
     <androidx.core.widget.NestedScrollView
@@ -287,56 +43,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <io.github.florent37.shapeofview.shapes.RoundRectView
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/firstImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:shape_roundRect_bottomLeftRadius="@dimen/_10sdp"
-                    app:shape_roundRect_bottomRightRadius="@dimen/_10sdp"
-                    app:shape_roundRect_topLeftRadius="@dimen/_10sdp"
-                    app:shape_roundRect_topRightRadius="@dimen/_10sdp">
+                    app:riv_corner_radius="@dimen/_10sdp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    />
 
-                    <ImageView
-                        android:id="@+id/firstImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:adjustViewBounds="true"
-                        />
-                </io.github.florent37.shapeofview.shapes.RoundRectView>
-
-                <io.github.florent37.shapeofview.shapes.RoundRectView
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/secondImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:shape_roundRect_bottomLeftRadius="@dimen/_10sdp"
-                    app:shape_roundRect_bottomRightRadius="@dimen/_10sdp"
-                    app:shape_roundRect_topLeftRadius="@dimen/_10sdp"
-                    app:shape_roundRect_topRightRadius="@dimen/_10sdp">
+                    app:riv_corner_radius="@dimen/_10sdp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    />
 
-                    <ImageView
-                        android:id="@+id/secondImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:adjustViewBounds="true"
-                        />
-                </io.github.florent37.shapeofview.shapes.RoundRectView>
-
-                <io.github.florent37.shapeofview.shapes.RoundRectView
+                <com.makeramen.roundedimageview.RoundedImageView
+                    android:id="@+id/thirdImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    app:shape_roundRect_bottomLeftRadius="@dimen/_10sdp"
-                    app:shape_roundRect_bottomRightRadius="@dimen/_10sdp"
-                    app:shape_roundRect_topLeftRadius="@dimen/_10sdp"
-                    app:shape_roundRect_topRightRadius="@dimen/_10sdp">
-
-                    <ImageView
-                        android:id="@+id/thirdImage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:adjustViewBounds="true"
-                        />
-                </io.github.florent37.shapeofview.shapes.RoundRectView>
+                    app:riv_corner_radius="@dimen/_10sdp"
+                    android:scaleType="centerCrop"
+                    android:adjustViewBounds="true"
+                    />
 
             </ViewFlipper>
 

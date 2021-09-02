@@ -1,8 +1,3 @@
-/*
- * Created by Henry Udorji on 6/6/21 6:55 PM
- * Copyright (c) 2021 Quilera. All rights reserved.
- * Last Modified 6/6/21 6:55 PM
- */
 
 package com.henryudorji.theater.utils
 
@@ -12,45 +7,58 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.Build
+import androidx.core.content.getSystemService
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 
-object NetworkManager: ConnectivityManager.NetworkCallback() {
-    private val networkLiveData: MutableLiveData<Boolean> = MutableLiveData()
+/**
+ * Network Manager, extends capabilities of  ConnectivityManager#NetworkCallback()
+ * by providing a observable callback on network status
+ *
+ * Author : [https://github.com/ch8n]
+ * website : [https://chetangupta.net]
+ * Creation Date : 4-08-2020
+ */
+class NetworkManager(context: Context) : ConnectivityManager.NetworkCallback() {
 
-    fun getNetworkInfo(context: Context): LiveData<Boolean> {
-        val connectivityManager =
-            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private val _connectionStatusLiveData: MutableLiveData<Boolean> = MutableLiveData()
+    val observeConnectionStatus: LiveData<Boolean> = _connectionStatusLiveData
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            connectivityManager.registerDefaultNetworkCallback(this)
-        } else {
-            val builder = NetworkRequest.Builder()
-            connectivityManager.registerNetworkCallback(builder.build(), this)
-        }
+    private val appContext: Context = context.applicationContext
 
-        var isConnected = false
+    init {
+        val connectivityManager = appContext.getSystemService<ConnectivityManager>()
 
-        // Retrieve current status of connectivity
-        connectivityManager.allNetworks.forEach { network ->
-            val networkCapability = connectivityManager.getNetworkCapabilities(network)
+        if (connectivityManager != null) {
+            connectivityManager.registerNetworkCallbackCompact(this)
 
-            networkCapability?.let {
-                if (it.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)) {
-                    isConnected = true
-                    return@forEach
-                }
+            val connectionStatus = connectivityManager.allNetworks.any { network ->
+                val networkCapabilities = connectivityManager.getNetworkCapabilities(network)
+                return@any networkCapabilities?.hasCapability(
+                    NetworkCapabilities.NET_CAPABILITY_INTERNET
+                ) == true
             }
+
+            _connectionStatusLiveData.value = connectionStatus
         }
-        networkLiveData.postValue(isConnected)
-        return networkLiveData
     }
 
     override fun onAvailable(network: Network) {
-        networkLiveData.postValue(true)
+        super.onAvailable(network)
+        _connectionStatusLiveData.postValue(true)
     }
 
     override fun onLost(network: Network) {
-        networkLiveData.postValue(false)
+        super.onLost(network)
+        _connectionStatusLiveData.postValue(false)
+    }
+
+    private fun ConnectivityManager.registerNetworkCallbackCompact(networkManager: NetworkManager) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            registerDefaultNetworkCallback(networkManager)
+        } else {
+            val builder = NetworkRequest.Builder()
+            registerNetworkCallback(builder.build(), networkManager)
+        }
     }
 }

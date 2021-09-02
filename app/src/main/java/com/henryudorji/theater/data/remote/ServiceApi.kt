@@ -6,7 +6,6 @@ import com.henryudorji.theater.data.model.detail.MovieDetailResponse
 import com.henryudorji.theater.data.model.detail.TvSeriesDetailResponse
 import com.henryudorji.theater.data.model.review.ReviewResponse
 import com.henryudorji.theater.data.model.video.VideoResponse
-import com.henryudorji.theater.utils.Constants.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -16,6 +15,11 @@ import retrofit2.http.Query
 // Created by hash on 5/2/2021.
 //
 interface ServiceApi {
+
+    companion object {
+        const val API_KEY = "fb827c7470c2b05072c9106ba63ddbf4"
+        const val BASE_URL = "https://api.themoviedb.org/3/"
+    }
 
     //MOVIES API -START
     @GET("movie/popular?api_key=$API_KEY&language=en-US")

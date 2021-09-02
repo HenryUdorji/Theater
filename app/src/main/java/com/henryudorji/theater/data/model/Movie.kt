@@ -1,9 +1,11 @@
 package com.henryudorji.theater.data.model
 
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
+@Entity
 data class Movie(
     @SerializedName("backdrop_path")
     val backdropPath: String,

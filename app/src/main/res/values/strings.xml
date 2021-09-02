@@ -11,4 +11,5 @@
     <string name="trending_movies">Trending</string>
     <string name="on_the_air">ON THE AIR</string>
     <string name="internet_not_available">Internet not available</string>
+    <string name="no_internet_msg">internet not available, check connection</string>
 </resources>

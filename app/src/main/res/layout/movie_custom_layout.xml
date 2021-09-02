@@ -4,30 +4,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/_120sdp"
-    android:layout_margin="@dimen/_5sdp"
     android:layout_height="wrap_content"
     android:id="@+id/rootLayout"
     android:background="@color/app_background_color">
 
-    <io.github.florent37.shapeofview.shapes.RoundRectView
-        android:id="@+id/imageShape"
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/movieImage"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_170sdp"
-        app:shape_roundRect_bottomLeftRadius="@dimen/_10sdp"
-        app:shape_roundRect_bottomRightRadius="@dimen/_10sdp"
-        app:shape_roundRect_topLeftRadius="@dimen/_10sdp"
-        app:shape_roundRect_topRightRadius="@dimen/_10sdp"
+        app:riv_corner_radius="@dimen/_10sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/movieTitleText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <ImageView
-            android:id="@+id/movieImage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
-    </io.github.florent37.shapeofview.shapes.RoundRectView>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -41,7 +30,7 @@
         android:textColor="@color/white"
         android:fontFamily="@font/raleway_regular"
         android:layout_marginTop="@dimen/_5sdp"
-        app:layout_constraintTop_toBottomOf="@id/imageShape"
+        app:layout_constraintTop_toBottomOf="@id/movieImage"
         app:layout_constraintStart_toStartOf="parent"
         />
 

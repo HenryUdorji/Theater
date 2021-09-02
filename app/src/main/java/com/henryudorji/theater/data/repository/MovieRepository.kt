@@ -1,34 +1,37 @@
 package com.henryudorji.theater.data.repository
 
+import com.henryudorji.theater.data.local.db.TheaterDb
+import com.henryudorji.theater.data.remote.ServiceApi
 import com.henryudorji.theater.data.remote.ServiceGenerator
+import javax.inject.Inject
 
-//
-// Created by Henry on 5/27/2021.
-//
-class MovieRepository() {
-    suspend fun getPopularMovies(page: Int) = ServiceGenerator.api.getPopularMovies(page)
-    suspend fun getUpcomingMovies(page: Int) = ServiceGenerator.api.getUpcomingMovies(page)
-    suspend fun getTopRatedMovies(page: Int) = ServiceGenerator.api.getTopRatedMovies(page)
 
-    suspend fun getPopularTvSeries(page: Int) = ServiceGenerator.api.getPopularTvSeries(page)
-    suspend fun getOnTheAir(page: Int) = ServiceGenerator.api.getOnTheAirTvSeries(page)
-    suspend fun getTopRatedTvSeries(page: Int) = ServiceGenerator.api.getTopRatedTvSeries(page)
+class MovieRepository @Inject constructor (
+    private val api: ServiceApi
+) {
+    suspend fun getPopularMovies(page: Int) = api.getPopularMovies(page)
+    suspend fun getUpcomingMovies(page: Int) = api.getUpcomingMovies(page)
+    suspend fun getTopRatedMovies(page: Int) = api.getTopRatedMovies(page)
 
-    suspend fun getNowPlayingMovies(page: Int) = ServiceGenerator.api.getNowPlayingMovies(page)
-    suspend fun getAiringTodayTvSeries(page: Int) = ServiceGenerator.api.getAiringTodayTvSeries(page)
+    suspend fun getPopularTvSeries(page: Int) = api.getPopularTvSeries(page)
+    suspend fun getOnTheAir(page: Int) = api.getOnTheAirTvSeries(page)
+    suspend fun getTopRatedTvSeries(page: Int) = api.getTopRatedTvSeries(page)
 
-    suspend fun getMovieDetails(movieID: Int) = ServiceGenerator.api.getMovieDetail(movieID)
-    suspend fun getTvSeriesDetails(movieID: Int) = ServiceGenerator.api.getTvSeriesDetail(movieID)
+    suspend fun getNowPlayingMovies(page: Int) = api.getNowPlayingMovies(page)
+    suspend fun getAiringTodayTvSeries(page: Int) = api.getAiringTodayTvSeries(page)
 
-    suspend fun getMovieRecommendation(movieID: Int) = ServiceGenerator.api.getMovieRecommendations(movieID)
-    suspend fun getTvSeriesRecommendation(movieID: Int) = ServiceGenerator.api.getTvSeriesRecommendations(movieID)
+    suspend fun getMovieDetails(movieID: Int) = api.getMovieDetail(movieID)
+    suspend fun getTvSeriesDetails(movieID: Int) = api.getTvSeriesDetail(movieID)
 
-    suspend fun getMovieReview(page: Int, movieID: Int) = ServiceGenerator.api.getMovieReviews(movieID, page)
-    suspend fun getTvSeriesReview(page: Int, movieID: Int) = ServiceGenerator.api.getTvSeriesReviews(movieID, page)
+    suspend fun getMovieRecommendation(movieID: Int) = api.getMovieRecommendations(movieID)
+    suspend fun getTvSeriesRecommendation(movieID: Int) = api.getTvSeriesRecommendations(movieID)
 
-    suspend fun getMovieCast(page: Int, movieID: Int) = ServiceGenerator.api.getMovieCredit(page, movieID)
-    suspend fun getTvSeriesCast(page: Int, movieID: Int) = ServiceGenerator.api.getTvSeriesCredit(page, movieID)
+    suspend fun getMovieReview(page: Int, movieID: Int) = api.getMovieReviews(movieID, page)
+    suspend fun getTvSeriesReview(page: Int, movieID: Int) = api.getTvSeriesReviews(movieID, page)
 
-    suspend fun getMovieVideo(movieID: Int) = ServiceGenerator.api.getMovieVideos(movieID)
-    suspend fun getTvSeriesVideo(movieID: Int) = ServiceGenerator.api.getTvSeriesVideos(movieID)
+    suspend fun getMovieCast(page: Int, movieID: Int) = api.getMovieCredit(page, movieID)
+    suspend fun getTvSeriesCast(page: Int, movieID: Int) = api.getTvSeriesCredit(page, movieID)
+
+    suspend fun getMovieVideo(movieID: Int) = api.getMovieVideos(movieID)
+    suspend fun getTvSeriesVideo(movieID: Int) = api.getTvSeriesVideos(movieID)
 }

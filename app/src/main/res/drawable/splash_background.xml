@@ -15,5 +15,7 @@
     </item>
     <item
         android:drawable="@drawable/ic_app_logo"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:height="@dimen/_50sdp"
+        android:width="@dimen/_50sdp"/>
 </layer-list>

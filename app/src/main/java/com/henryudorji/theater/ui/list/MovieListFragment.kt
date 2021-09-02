@@ -1,23 +1,22 @@
 package com.henryudorji.theater.ui.list
 
 import android.os.Bundle
-import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AbsListView
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.theater.R
 import com.henryudorji.theater.adapters.MovieListRecyclerAdapter
 import com.henryudorji.theater.data.model.MovieResponse
 import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentMovieListBinding
-import com.henryudorji.theater.ui.main.MainActivity
-import com.henryudorji.theater.utils.ConnectionManager
+import com.henryudorji.theater.ui.base.BaseFragment
 import com.henryudorji.theater.utils.Constants.FRAG_ID
 import com.henryudorji.theater.utils.Constants.ON_THE_AIR
 import com.henryudorji.theater.utils.Constants.MOVIE
@@ -27,18 +26,12 @@ import com.henryudorji.theater.utils.Constants.QUERY_PAGE_SIZE
 import com.henryudorji.theater.utils.Constants.TOP_RATED
 import com.henryudorji.theater.utils.Constants.TRENDING
 import com.henryudorji.theater.utils.Constants.UPCOMING
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.IOException
+import dagger.hilt.android.AndroidEntryPoint
 
-//
-// Created by hash on 5/2/2021.
-//
-class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
+
+@AndroidEntryPoint
+class MovieListFragment: BaseFragment<FragmentMovieListBinding, ListViewModel>() {
     private val TAG = "MovieListFragment"
-    private lateinit var binding: FragmentMovieListBinding
     private lateinit var movieListAdapter: MovieListRecyclerAdapter
     private lateinit var movieCategory: String
     private var fragID: Int = 1
@@ -47,19 +40,25 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
     private var moviePage = 1
     private var dataResponse: MovieResponse? = null
 
+    override val viewModel: ListViewModel by activityViewModels()
+
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = FragmentMovieListBinding.inflate(inflater, container, false)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMovieListBinding.bind(view)
 
         movieCategory = args.moviecategory
         fragID = args.fragid
-        movieRepository = (activity as MainActivity).movieRepository
+        //movieRepository = (activity as MainActivity).movieRepository
 
         initViews()
-        getMoviesData()
+        //getMoviesData()
     }
 
-    private fun getMoviesData() = CoroutineScope(Dispatchers.Main).launch{
+    /*private fun getMoviesData() = CoroutineScope(Dispatchers.Main).launch{
         withContext(Dispatchers.Main) {
             showShimmerPlaceHolder()
         }
@@ -115,7 +114,7 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
                 }
             }
         }
-    }
+    }*/
 
     private fun showShimmerPlaceHolder() {
         binding.movieListRv.visibility = View.GONE
@@ -133,7 +132,7 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
         }
     }
 
-    private fun showNoNetworkSnackBar(message: String) {
+    /*private fun showNoNetworkSnackBar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_INDEFINITE)
                 .setAction(getString(R.string.retry)) {
                     if (ConnectionManager.hasInternetConnection(requireContext())) {
@@ -143,7 +142,7 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
                     }
                 }.show()
 
-    }
+    }*/
 
     private fun initViews() {
         binding.backBtn.setOnClickListener {
@@ -210,7 +209,7 @@ class MovieListFragment: Fragment(R.layout.fragment_movie_list) {
                     && isTotalMoreThanVisible && isScrolling
 
             if (shouldPaginate) {
-                getMoviesData()
+                //getMoviesData()
                 isScrolling = false
             }
         }

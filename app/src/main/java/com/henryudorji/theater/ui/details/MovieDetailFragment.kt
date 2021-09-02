@@ -2,8 +2,10 @@ package com.henryudorji.theater.ui.details
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.Fragment
+import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -17,13 +19,13 @@ import com.henryudorji.theater.data.model.detail.MovieDetailResponse
 import com.henryudorji.theater.data.model.detail.TvSeriesDetailResponse
 import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentMovieDetailBinding
-import com.henryudorji.theater.ui.main.MainActivity
-import com.henryudorji.theater.utils.ConnectionManager
+import com.henryudorji.theater.ui.base.BaseFragment
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
 import com.henryudorji.theater.utils.Constants.MOVIE
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.squareup.picasso.Picasso
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,12 +33,9 @@ import kotlinx.coroutines.withContext
 import java.io.IOException
 
 
-//
-// Created by hash on 5/2/2021.
-//
-class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
+@AndroidEntryPoint
+class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewModel>() {
     private val TAG = "MovieDetailFragment"
-    private lateinit var binding: FragmentMovieDetailBinding
     private lateinit var movieRepository: MovieRepository
     private lateinit var genreRecyclerAdapter: GenreRecyclerAdapter
     private lateinit var castRecyclerAdapter: CastRecyclerAdapter
@@ -47,19 +46,25 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
     private var fragID: Int = 1
     private var page = 1
 
+    override val viewModel: DetailsViewModel by activityViewModels()
+
+    override fun getViewBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = FragmentMovieDetailBinding.inflate(inflater, container, false)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMovieDetailBinding.bind(view)
 
         movieID = args.movieid
         fragID = args.fragid
-        movieRepository = (activity as MainActivity).movieRepository
+        //movieRepository = (activity as MainActivity).movieRepository
 
         initViews()
-        getDetails()
+        //getDetails()
     }
 
-    private fun getDetails() = CoroutineScope(Dispatchers.IO).launch {
+    /*private fun getDetails() = CoroutineScope(Dispatchers.IO).launch {
         withContext(Dispatchers.Main) {
             showShimmerPlaceHolder()
         }
@@ -139,7 +144,7 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
             }
         }
 
-    }
+    }*/
 
     private fun showInitialDetail(movieData: MovieDetailResponse?, tvData: TvSeriesDetailResponse?) {
         val genreList: List<Genre>
@@ -335,11 +340,11 @@ class MovieDetailFragment: Fragment(R.layout.fragment_movie_detail) {
     private fun showNoNetworkSnackBar(message: String) {
         Snackbar.make(binding.root, message, Snackbar.LENGTH_INDEFINITE)
                 .setAction(getString(R.string.retry)) {
-                    if (ConnectionManager.hasInternetConnection(requireContext())) {
+                    /*if (ConnectionManager.hasInternetConnection(requireContext())) {
                         getDetails()
                     }else {
                         showNoNetworkSnackBar(message)
-                    }
+                    }*/
                 }.show()
 
     }

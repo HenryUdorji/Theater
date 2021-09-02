@@ -7,10 +7,11 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.henryudorji.theater.R
 import com.henryudorji.theater.adapters.ViewpagerAdapter
 import com.henryudorji.theater.databinding.FragmentHomeBinding
+import com.henryudorji.theater.ui.home.movies.HomeMoviesFragment
+import com.henryudorji.theater.ui.home.search.HomeSearchFragment
+import com.henryudorji.theater.ui.home.tvseries.HomeTvSeriesFragment
 
-//
-// Created by hash on 5/2/2021.
-//
+
 class HomeFragment: Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var viewpagerAdapter: ViewpagerAdapter
