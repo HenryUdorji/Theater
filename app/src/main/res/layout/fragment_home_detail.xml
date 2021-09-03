@@ -31,47 +31,6 @@
             android:paddingBottom="@dimen/_5sdp"
             android:background="@color/app_background_color">
 
-            <ViewFlipper
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_170sdp"
-                android:id="@+id/swipeViewFlipper"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:flipInterval="5000"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/firstImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:riv_corner_radius="@dimen/_10sdp"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    />
-
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/secondImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:riv_corner_radius="@dimen/_10sdp"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    />
-
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:id="@+id/thirdImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:riv_corner_radius="@dimen/_10sdp"
-                    android:scaleType="centerCrop"
-                    android:adjustViewBounds="true"
-                    />
-
-            </ViewFlipper>
-
             <TextView
                 android:id="@+id/popularMoviesText"
                 android:layout_width="0dp"
@@ -82,7 +41,7 @@
                 android:textColor="@color/white"
                 android:padding="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_5sdp"
-                app:layout_constraintTop_toBottomOf="@id/swipeViewFlipper"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/showAllPopularText"/>
 
@@ -96,7 +55,7 @@
                 android:textColor="@color/red"
                 android:padding="@dimen/_10sdp"
                 app:layout_constraintBottom_toTopOf="@id/popularRv"
-                app:layout_constraintTop_toBottomOf="@id/swipeViewFlipper"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/popularMoviesText"/>
 

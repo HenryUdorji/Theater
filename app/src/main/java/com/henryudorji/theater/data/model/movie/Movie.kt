@@ -1,4 +1,4 @@
-package com.henryudorji.theater.data.model
+package com.henryudorji.theater.data.model.movie
 
 
 import androidx.room.Entity

@@ -109,6 +109,9 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     kapt "androidx.hilt:hilt-compiler:$hilt_androidX_version"
+
+    //Fast Adapter
+    implementation "com.mikepenz:fastadapter:5.4.1"
 }
 kapt {
     correctErrorTypes true

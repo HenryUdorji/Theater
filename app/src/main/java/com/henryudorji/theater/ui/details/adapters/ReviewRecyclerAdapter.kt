@@ -1,4 +1,4 @@
-package com.henryudorji.theater.adapters
+package com.henryudorji.theater.ui.details.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

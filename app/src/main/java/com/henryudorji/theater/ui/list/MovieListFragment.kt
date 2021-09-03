@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.henryudorji.theater.R
-import com.henryudorji.theater.adapters.MovieListRecyclerAdapter
-import com.henryudorji.theater.data.model.MovieResponse
+import com.henryudorji.theater.data.model.movie.MovieResponse
 import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentMovieListBinding
 import com.henryudorji.theater.ui.base.BaseFragment

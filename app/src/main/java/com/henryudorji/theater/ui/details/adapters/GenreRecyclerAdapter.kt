@@ -1,16 +1,12 @@
-package com.henryudorji.theater.adapters
+package com.henryudorji.theater.ui.details.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.henryudorji.theater.data.model.Movie
 import com.henryudorji.theater.data.model.detail.Genre
 import com.henryudorji.theater.databinding.GenreCustomLayoutBinding
-import com.henryudorji.theater.databinding.MovieCustomLayoutBinding
-import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
-import com.squareup.picasso.Picasso
 
 //
 // Created by hash on 5/3/2021.

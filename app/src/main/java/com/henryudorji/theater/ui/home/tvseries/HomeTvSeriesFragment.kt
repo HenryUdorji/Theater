@@ -1,23 +1,17 @@
 package com.henryudorji.theater.ui.home.tvseries
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.theater.R
-import com.henryudorji.theater.adapters.MovieRecyclerAdapter
-import com.henryudorji.theater.data.model.Movie
-import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentHomeDetailBinding
-import com.henryudorji.theater.ui.MainActivity
 import com.henryudorji.theater.ui.base.BaseFragment
-import com.henryudorji.theater.ui.home.movies.MoviesViewModel
+import com.henryudorji.theater.ui.home.HomeViewModel
 import com.henryudorji.theater.utils.*
 import com.henryudorji.theater.utils.Constants.FRAG_ID
 import com.henryudorji.theater.utils.Constants.ON_THE_AIR
@@ -26,25 +20,19 @@ import com.henryudorji.theater.utils.Constants.MOVIE_ID
 import com.henryudorji.theater.utils.Constants.POPULAR
 import com.henryudorji.theater.utils.Constants.TOP_RATED
 import com.henryudorji.theater.utils.Constants.TV_SERIES
-import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.IOException
 
 
 @AndroidEntryPoint
-class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesViewModel>() {
+class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, HomeViewModel>() {
 
     private val TAG = "HomeTvSeriesFragment"
-    override val viewModel: TvSeriesViewModel by activityViewModels()
-    private lateinit var popularAdapter: MovieRecyclerAdapter
-    private lateinit var onTheAirAdapter: MovieRecyclerAdapter
-    private lateinit var topRatedAdapter: MovieRecyclerAdapter
+    override val viewModel: HomeViewModel by activityViewModels()
+    private lateinit var popularAdapter: TvSeriesRecyclerAdapter
+    private lateinit var onTheAirAdapter: TvSeriesRecyclerAdapter
+    private lateinit var topRatedAdapter: TvSeriesRecyclerAdapter
 
-    private var moviePage = 1
+    private var page = 1
 
     override fun getViewBinding(
         inflater: LayoutInflater,
@@ -54,30 +42,22 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.apply {
+            getPopularTvSeries(page)
+            getOnTheAirTvSeries(page)
+            getTopRatedTvSeries(page)
+        }
+
         initViews()
         observeMovieData()
     }
 
     private fun observeMovieData() {
-        viewModel.airingTodayLiveData.observe(viewLifecycleOwner) { state ->
-            when (state) {
-                is Resource.Loading -> showShimmerPlaceHolder()
-                is Resource.Error -> {
-                    Snackbar.make(binding.root, state.message!!, Snackbar.LENGTH_LONG).show()
-                }
-                is Resource.Success -> {
-                    state.data?.let { movieResponse ->
-                        setupViewFlipper(movieResponse.movies)
-                    }
-                }
-            }
-        }
-
         viewModel.onTheAirLiveData.observe(viewLifecycleOwner) { state ->
             when(state) {
                 is Resource.Success -> {
                     state.data?.let {
-                        onTheAirAdapter.differ.submitList(it.movies.shuffled().subList(0, 10))
+                        onTheAirAdapter.differ.submitList(it.tvSeries.shuffled().subList(0, 10))
                     }
                 }
                 is Resource.Error -> {
@@ -91,7 +71,7 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
             when(state) {
                 is Resource.Success -> {
                     state.data?.let {
-                        topRatedAdapter.differ.submitList(it.movies.shuffled().subList(0, 10))
+                        topRatedAdapter.differ.submitList(it.tvSeries.shuffled().subList(0, 10))
                     }
                 }
                 is Resource.Error -> {
@@ -106,7 +86,7 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
                 is Resource.Success -> {
                     hideShimmerPlaceHolder()
                     state.data?.let {
-                        popularAdapter.differ.submitList(it.movies.shuffled().subList(0, 10))
+                        popularAdapter.differ.submitList(it.tvSeries.shuffled().subList(0, 10))
                     }
                 }
                 is Resource.Error -> {
@@ -119,35 +99,6 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
         }
     }
 
-    private fun setupViewFlipper(movies: MutableList<Movie>) {
-        Picasso.get().load(Constants.BASE_URL_IMAGE + movies[0].posterPath).into(binding.firstImage)
-        Picasso.get().load(Constants.BASE_URL_IMAGE + movies[1].posterPath).into(binding.secondImage)
-        Picasso.get().load(Constants.BASE_URL_IMAGE + movies[2].posterPath).into(binding.thirdImage)
-        binding.swipeViewFlipper.startFlipping()
-
-        binding.firstImage.setOnClickListener {
-            val bundle = Bundle().apply {
-                putInt(MOVIE_ID, movies[0].id)
-                putInt(FRAG_ID, TV_SERIES)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
-        }
-        binding.secondImage.setOnClickListener {
-            val bundle = Bundle().apply {
-                putInt(MOVIE_ID, movies[1].id)
-                putInt(FRAG_ID, TV_SERIES)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
-        }
-        binding.thirdImage.setOnClickListener {
-            val bundle = Bundle().apply {
-                putInt(MOVIE_ID, movies[2].id)
-                putInt(FRAG_ID, TV_SERIES)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
-        }
-    }
-
     private fun hideShimmerPlaceHolder() = with(binding) {
         normalLayout.show()
         shimmerInclude.apply {
@@ -155,7 +106,6 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
             popularShimmerFrame.stopShimmer()
             upcomingMoviesShimmer.stopShimmer()
             topRatedMoviesShimmer.stopShimmer()
-            swipeShimmer.stopShimmer()
         }
     }
 
@@ -166,16 +116,15 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
             popularShimmerFrame.startShimmer()
             upcomingMoviesShimmer.startShimmer()
             topRatedMoviesShimmer.startShimmer()
-            swipeShimmer.startShimmer()
         }
     }
 
     private fun initViews() {
         binding.upcomingMoviesText.text = getString(R.string.on_the_air)
 
-        popularAdapter = MovieRecyclerAdapter()
-        onTheAirAdapter = MovieRecyclerAdapter()
-        topRatedAdapter = MovieRecyclerAdapter()
+        popularAdapter = TvSeriesRecyclerAdapter()
+        onTheAirAdapter = TvSeriesRecyclerAdapter()
+        topRatedAdapter = TvSeriesRecyclerAdapter()
 
         binding.popularRv.apply {
             adapter = popularAdapter
@@ -183,9 +132,9 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
                 hasFixedSize()
             }
         }
-        popularAdapter.setOnItemClickListener { movieID ->
+        popularAdapter.setOnItemClickListener { tvSeriesID ->
             val bundle = Bundle().apply {
-                putInt(MOVIE_ID, movieID)
+                putInt(MOVIE_ID, tvSeriesID)
                 putInt(FRAG_ID, TV_SERIES)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
@@ -198,9 +147,9 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
                 hasFixedSize()
             }
         }
-        onTheAirAdapter.setOnItemClickListener { movieID ->
+        onTheAirAdapter.setOnItemClickListener { tvSeriesID ->
             val bundle = Bundle().apply {
-                putInt(MOVIE_ID, movieID)
+                putInt(MOVIE_ID, tvSeriesID)
                 putInt(FRAG_ID, TV_SERIES)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
@@ -212,9 +161,9 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, TvSeriesView
                 hasFixedSize()
             }
         }
-        topRatedAdapter.setOnItemClickListener { movieID ->
+        topRatedAdapter.setOnItemClickListener { tvSeriesID ->
             val bundle = Bundle().apply {
-                putInt(MOVIE_ID, movieID)
+                putInt(MOVIE_ID, tvSeriesID)
                 putInt(FRAG_ID, TV_SERIES)
             }
             findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)

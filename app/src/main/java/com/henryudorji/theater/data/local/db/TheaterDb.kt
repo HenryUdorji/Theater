@@ -2,7 +2,7 @@ package com.henryudorji.theater.data.local.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.henryudorji.theater.data.model.Movie
+import com.henryudorji.theater.data.model.movie.Movie
 
 
 @Database(

@@ -1,22 +1,19 @@
-package com.henryudorji.theater.adapters
+package com.henryudorji.theater.ui.home.movies
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.henryudorji.theater.data.model.Movie
+import com.henryudorji.theater.data.model.movie.Movie
 import com.henryudorji.theater.databinding.MovieCustomLayoutBinding
-import com.henryudorji.theater.databinding.MovieCustomLayoutListBinding
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
 import com.squareup.picasso.Picasso
 
-//
-// Created by hash on 5/3/2021.
-//
-class MovieListRecyclerAdapter(): RecyclerView.Adapter<MovieListRecyclerAdapter.MovieViewHolder>() {
 
-    inner class MovieViewHolder(val binding: MovieCustomLayoutListBinding): RecyclerView.ViewHolder(binding.root)
+class MovieRecyclerAdapter(): RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
+
+    inner class MovieViewHolder(val binding: MovieCustomLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object: DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -30,7 +27,7 @@ class MovieListRecyclerAdapter(): RecyclerView.Adapter<MovieListRecyclerAdapter.
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val binding = MovieCustomLayoutListBinding.inflate(
+        val binding = MovieCustomLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -43,7 +40,9 @@ class MovieListRecyclerAdapter(): RecyclerView.Adapter<MovieListRecyclerAdapter.
 
         holder.binding.apply {
             Picasso.get().load(BASE_URL_IMAGE + movie.posterPath).into(movieImage)
-            movieTitleText.text = movie.originalTitle
+
+            movieTitleText.text = movie.title
+
             ratingText.text = movie.voteAverage.toString()
 
             this.root.setOnClickListener {

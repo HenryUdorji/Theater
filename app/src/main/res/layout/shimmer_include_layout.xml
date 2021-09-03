@@ -17,33 +17,6 @@
         android:background="@color/app_background_color"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/swipeShimmer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:layout_marginEnd="@dimen/_10sdp"
-            android:background="@color/app_background_color"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <androidx.cardview.widget.CardView android:layout_width="match_parent"
-                android:layout_height="@dimen/_170sdp"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                app:cardCornerRadius="@dimen/_10sdp"
-                app:cardBackgroundColor="@color/app_background_color"
-                app:cardElevation="@dimen/_10sdp">
-
-                <ImageView
-                    android:id="@+id/swipeImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@color/shimmer_placeholder"/>
-            </androidx.cardview.widget.CardView>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
         <TextView
             android:id="@+id/popularMoviesTexts"
             android:layout_width="0dp"
@@ -54,7 +27,7 @@
             android:textColor="@color/white"
             android:padding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_5sdp"
-            app:layout_constraintTop_toBottomOf="@id/swipeShimmer"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/showAllPopularTexts"/>
 
@@ -68,7 +41,7 @@
             android:textColor="@color/red"
             android:padding="@dimen/_10sdp"
             app:layout_constraintBottom_toTopOf="@id/popularShimmerFrame"
-            app:layout_constraintTop_toBottomOf="@id/swipeShimmer"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/popularMoviesTexts"/>
 

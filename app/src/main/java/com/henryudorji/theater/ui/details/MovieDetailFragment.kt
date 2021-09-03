@@ -10,10 +10,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.theater.R
-import com.henryudorji.theater.adapters.CastRecyclerAdapter
-import com.henryudorji.theater.adapters.GenreRecyclerAdapter
-import com.henryudorji.theater.adapters.MovieRecyclerAdapter
-import com.henryudorji.theater.adapters.ReviewRecyclerAdapter
+import com.henryudorji.theater.ui.details.adapters.CastRecyclerAdapter
+import com.henryudorji.theater.ui.details.adapters.GenreRecyclerAdapter
+import com.henryudorji.theater.ui.home.movies.MovieRecyclerAdapter
+import com.henryudorji.theater.ui.details.adapters.ReviewRecyclerAdapter
 import com.henryudorji.theater.data.model.detail.Genre
 import com.henryudorji.theater.data.model.detail.MovieDetailResponse
 import com.henryudorji.theater.data.model.detail.TvSeriesDetailResponse
@@ -214,7 +214,7 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
                 movieRepository.getTvSeriesRecommendation(movieID)
             }
 
-            if (recommendation.isSuccessful) {
+            /*if (recommendation.isSuccessful) {
                 recommendation.body()?.let { data ->
                     recommendationRecyclerAdapter.differ.submitList(data.movies)
                 }
@@ -222,7 +222,7 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
                 withContext(Dispatchers.Main) {
                     showNoNetworkSnackBar(recommendation.message())
                 }
-            }
+            }*/
 
         }catch (t: Throwable) {
             when(t) {

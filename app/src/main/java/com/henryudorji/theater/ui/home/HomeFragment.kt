@@ -5,7 +5,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.henryudorji.theater.R
-import com.henryudorji.theater.adapters.ViewpagerAdapter
 import com.henryudorji.theater.databinding.FragmentHomeBinding
 import com.henryudorji.theater.ui.home.movies.HomeMoviesFragment
 import com.henryudorji.theater.ui.home.search.HomeSearchFragment

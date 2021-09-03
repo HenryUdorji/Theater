@@ -1,19 +1,18 @@
 package com.henryudorji.theater.data.remote
 
-import com.henryudorji.theater.data.model.MovieResponse
+import com.henryudorji.theater.data.model.movie.MovieResponse
 import com.henryudorji.theater.data.model.cast.CastResponse
 import com.henryudorji.theater.data.model.detail.MovieDetailResponse
 import com.henryudorji.theater.data.model.detail.TvSeriesDetailResponse
 import com.henryudorji.theater.data.model.review.ReviewResponse
+import com.henryudorji.theater.data.model.tv.TvSeriesResponse
 import com.henryudorji.theater.data.model.video.VideoResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-//
-// Created by hash on 5/2/2021.
-//
+
 interface ServiceApi {
 
     companion object {
@@ -90,19 +89,19 @@ interface ServiceApi {
     suspend fun getPopularTvSeries(
             @Query("page")
             page: Int = 1
-    ): Response<MovieResponse>
+    ): Response<TvSeriesResponse>
 
     @GET("tv/top_rated?api_key=$API_KEY&language=en-US")
     suspend fun getTopRatedTvSeries(
             @Query("page")
             page: Int = 1
-    ): Response<MovieResponse>
+    ): Response<TvSeriesResponse>
 
     @GET("tv/on_the_air?api_key=$API_KEY&language=en-US")
     suspend fun getOnTheAirTvSeries(
             @Query("page")
             page: Int = 1
-    ): Response<MovieResponse>
+    ): Response<TvSeriesResponse>
 
     @GET("tv/{tv_id}?api_key=$API_KEY&language=en-US")
     suspend fun getTvSeriesDetail(
@@ -124,7 +123,7 @@ interface ServiceApi {
             tvId: Int,
             @Query("page")
             page: Int = 1
-    ): Response<MovieResponse>
+    ): Response<TvSeriesResponse>
 
     @GET("tv/{tv_id}/reviews?api_key=$API_KEY&language=en-US")
     suspend fun getTvSeriesReviews(
@@ -144,7 +143,7 @@ interface ServiceApi {
     suspend fun getAiringTodayTvSeries(
             @Query("page")
             page: Int = 1
-    ): Response<MovieResponse>
+    ): Response<TvSeriesResponse>
 
     //TV_SERIES API - END
 
@@ -164,7 +163,7 @@ interface ServiceApi {
             page: Int = 1,
             @Query("query")
             query: String
-    ): Response<MovieResponse>
+    ): Response<TvSeriesResponse>
 
     //SEARCH API - END
 }

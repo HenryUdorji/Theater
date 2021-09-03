@@ -17,9 +17,6 @@ class MovieRepository @Inject constructor (
     suspend fun getOnTheAir(page: Int) = api.getOnTheAirTvSeries(page)
     suspend fun getTopRatedTvSeries(page: Int) = api.getTopRatedTvSeries(page)
 
-    suspend fun getNowPlayingMovies(page: Int) = api.getNowPlayingMovies(page)
-    suspend fun getAiringTodayTvSeries(page: Int) = api.getAiringTodayTvSeries(page)
-
     suspend fun getMovieDetails(movieID: Int) = api.getMovieDetail(movieID)
     suspend fun getTvSeriesDetails(movieID: Int) = api.getTvSeriesDetail(movieID)
 

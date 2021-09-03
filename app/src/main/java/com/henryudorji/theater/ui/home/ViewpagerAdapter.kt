@@ -1,11 +1,9 @@
-package com.henryudorji.theater.adapters
+package com.henryudorji.theater.ui.home
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-//
-// Created by hash on 5/2/2021.
-//
+
 class ViewpagerAdapter(
     fragment: Fragment,
     private val fragments: MutableList<Fragment>
