@@ -28,9 +28,9 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, HomeViewMode
 
     private val TAG = "HomeTvSeriesFragment"
     override val viewModel: HomeViewModel by activityViewModels()
-    private lateinit var popularAdapter: TvSeriesRecyclerAdapter
-    private lateinit var onTheAirAdapter: TvSeriesRecyclerAdapter
-    private lateinit var topRatedAdapter: TvSeriesRecyclerAdapter
+    private lateinit var popularAdapter: TvSeriesRvAdapter
+    private lateinit var onTheAirAdapter: TvSeriesRvAdapter
+    private lateinit var topRatedAdapter: TvSeriesRvAdapter
 
     private var page = 1
 
@@ -122,9 +122,9 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, HomeViewMode
     private fun initViews() {
         binding.upcomingMoviesText.text = getString(R.string.on_the_air)
 
-        popularAdapter = TvSeriesRecyclerAdapter()
-        onTheAirAdapter = TvSeriesRecyclerAdapter()
-        topRatedAdapter = TvSeriesRecyclerAdapter()
+        popularAdapter = TvSeriesRvAdapter()
+        onTheAirAdapter = TvSeriesRvAdapter()
+        topRatedAdapter = TvSeriesRvAdapter()
 
         binding.popularRv.apply {
             adapter = popularAdapter

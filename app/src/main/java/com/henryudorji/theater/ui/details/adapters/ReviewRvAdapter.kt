@@ -6,16 +6,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.henryudorji.theater.data.model.review.Review
-import com.henryudorji.theater.databinding.ReviewCustomLayoutBinding
+import com.henryudorji.theater.databinding.RvReviewLayoutBinding
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
 import com.squareup.picasso.Picasso
 
-//
-// Created by hash on 5/3/2021.
-//
-class ReviewRecyclerAdapter(): RecyclerView.Adapter<ReviewRecyclerAdapter.ReviewViewHolder>() {
 
-    inner class ReviewViewHolder(val binding: ReviewCustomLayoutBinding): RecyclerView.ViewHolder(binding.root)
+class ReviewRvAdapter(): RecyclerView.Adapter<ReviewRvAdapter.ReviewViewHolder>() {
+
+    inner class ReviewViewHolder(val binding: RvReviewLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object: DiffUtil.ItemCallback<Review>() {
         override fun areItemsTheSame(oldItem: Review, newItem: Review): Boolean {
@@ -29,7 +27,7 @@ class ReviewRecyclerAdapter(): RecyclerView.Adapter<ReviewRecyclerAdapter.Review
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
-        val binding = ReviewCustomLayoutBinding.inflate(
+        val binding = RvReviewLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

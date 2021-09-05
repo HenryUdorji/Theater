@@ -55,9 +55,9 @@ class HomeViewModel @Inject constructor (
                     topRatedMoviesResponse.body()?.let { movieResponse ->
                         _topRatedMoviesLiveData.postValue(Resource.Success(movieResponse))
                     }
-                }else  _topRatedMoviesLiveData.postValue(
-                    Resource.Error(topRatedMoviesResponse.errorBody().toString())
-                )
+                }else  {
+                    _topRatedMoviesLiveData.postValue(Resource.Error(topRatedMoviesResponse.errorBody().toString()))
+                }
             } catch (e: Exception) {
                 _topRatedMoviesLiveData.postValue(Resource.Error(e.localizedMessage))
             }
@@ -72,7 +72,7 @@ class HomeViewModel @Inject constructor (
         _upcomingMoviesLiveData.postValue(Resource.Loading())
         if (networkObserver.value == true) {
             try {
-                val upcomingMoviesResponse = repository.getPopularMovies(page)
+                val upcomingMoviesResponse = repository.getUpcomingMovies(page)
                 if (upcomingMoviesResponse.isSuccessful) {
                     upcomingMoviesResponse.body()?.let { movieResponse ->
                         _upcomingMoviesLiveData.postValue(Resource.Success(movieResponse))

@@ -7,64 +7,12 @@
     android:background="@color/app_background_color"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--SHIMMER LAYOUT-->
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/shimmerLayout"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:scrollbars="none">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/_5sdp"
-            android:paddingBottom="@dimen/_5sdp"
-            android:background="@color/app_background_color">
-
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/shimmerBar"
-                android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
-                android:background="@color/app_background_color"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                />
-
-            <com.facebook.shimmer.ShimmerFrameLayout
-                android:id="@+id/detailShimmer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:background="@color/app_background_color"
-                app:layout_constraintTop_toBottomOf="@id/shimmerBar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <include layout="@layout/details_shimmer_effect_placeholder"/>
-                    <include layout="@layout/details_shimmer_effect_placeholder"/>
-                    <include layout="@layout/details_shimmer_effect_placeholder"/>
-                    <include layout="@layout/details_shimmer_effect_placeholder"/>
-                    <include layout="@layout/details_shimmer_effect_placeholder"/>
-                </LinearLayout>
-            </com.facebook.shimmer.ShimmerFrameLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
     <!--NORMAL LAYOUT-->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/normalLayout"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:fillViewport="true"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -110,7 +58,7 @@
                 android:id="@+id/movieTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
+                android:text=""
                 style="@style/TitleTextStyle"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
@@ -137,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_2sdp"
                 android:fontFamily="@font/raleway_regular"
-                android:text="4.5/10"
+                android:text=""
                 android:textSize="@dimen/_11ssp"
                 android:textColor="@color/gray"
                 app:layout_constraintStart_toEndOf="@id/ratingImage"
@@ -161,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_regular"
-                android:text="90 minutes"
+                android:text=""
                 android:layout_marginStart="@dimen/_2sdp"
                 android:textSize="@dimen/_11ssp"
                 android:textColor="@color/gray"
@@ -186,7 +134,7 @@
                 android:id="@+id/budgetText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Budget: $100000"
+                android:text="Budget: "
                 android:fontFamily="@font/raleway_regular"
                 android:textSize="@dimen/_11ssp"
                 android:textColor="@color/gray"
@@ -201,7 +149,7 @@
                 android:id="@+id/revenueText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Revenue: $100000"
+                android:text="Revenue: "
                 android:fontFamily="@font/raleway_regular"
                 android:textSize="@dimen/_11ssp"
                 android:textColor="@color/gray"
@@ -211,6 +159,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/budgetText"
                 />
+<!--
 
             <TextView
                 android:id="@+id/seasonText"
@@ -243,6 +192,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/budgetText"
                 />
+-->
 
 
             <TextView
@@ -273,28 +223,6 @@
                 app:layout_constraintTop_toBottomOf="@id/watch"
                 />
 
-            <io.github.florent37.shapeofview.shapes.RoundRectView
-                android:id="@+id/roundRectView"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/_150sdp"
-                app:shape_roundRect_topLeftRadius="@dimen/_10sdp"
-                app:shape_roundRect_topRightRadius="@dimen/_10sdp"
-                app:shape_roundRect_bottomRightRadius="@dimen/_10sdp"
-                app:shape_roundRect_bottomLeftRadius="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginEnd="@dimen/_10sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/watch">
-
-                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                    android:id="@+id/youtubePlayerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:autoPlay="false"
-                    app:showFullScreenButton="false" />
-            </io.github.florent37.shapeofview.shapes.RoundRectView>
 
             <TextView
                 android:id="@+id/storyLineText"
@@ -305,7 +233,7 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginStart="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/roundRectView"
+                app:layout_constraintTop_toBottomOf="@id/videoRv"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 />
@@ -314,7 +242,7 @@
                 android:id="@+id/movieOverviewText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="lorem ipsum"
+                android:text=""
                 android:textColor="@color/gray"
                 android:fontFamily="@font/raleway_regular"
                 android:textSize="@dimen/_11ssp"
@@ -410,7 +338,7 @@
                 android:id="@+id/totalReviewText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="2K reviews"
+                android:text=""
                 android:fontFamily="@font/raleway_regular"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/_11ssp"
@@ -452,5 +380,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 

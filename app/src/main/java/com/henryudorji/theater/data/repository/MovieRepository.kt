@@ -1,8 +1,6 @@
 package com.henryudorji.theater.data.repository
 
-import com.henryudorji.theater.data.local.db.TheaterDb
 import com.henryudorji.theater.data.remote.ServiceApi
-import com.henryudorji.theater.data.remote.ServiceGenerator
 import javax.inject.Inject
 
 
@@ -18,17 +16,20 @@ class MovieRepository @Inject constructor (
     suspend fun getTopRatedTvSeries(page: Int) = api.getTopRatedTvSeries(page)
 
     suspend fun getMovieDetails(movieID: Int) = api.getMovieDetail(movieID)
-    suspend fun getTvSeriesDetails(movieID: Int) = api.getTvSeriesDetail(movieID)
+    suspend fun getTvSeriesDetails(tvSeriesID: Int) = api.getTvSeriesDetail(tvSeriesID)
 
     suspend fun getMovieRecommendation(movieID: Int) = api.getMovieRecommendations(movieID)
-    suspend fun getTvSeriesRecommendation(movieID: Int) = api.getTvSeriesRecommendations(movieID)
+    suspend fun getTvSeriesRecommendation(tvSeriesID: Int) = api.getTvSeriesRecommendations(tvSeriesID)
 
-    suspend fun getMovieReview(page: Int, movieID: Int) = api.getMovieReviews(movieID, page)
-    suspend fun getTvSeriesReview(page: Int, movieID: Int) = api.getTvSeriesReviews(movieID, page)
+    suspend fun getMovieReview(movieID: Int, page: Int) = api.getMovieReviews(movieID, page)
+    suspend fun getTvSeriesReview(tvSeriesID: Int, page: Int) = api.getTvSeriesReviews(tvSeriesID, page)
 
-    suspend fun getMovieCast(page: Int, movieID: Int) = api.getMovieCredit(page, movieID)
-    suspend fun getTvSeriesCast(page: Int, movieID: Int) = api.getTvSeriesCredit(page, movieID)
+    suspend fun getMovieCast(movieID: Int, page: Int) = api.getMovieCredit(movieID, page)
+    suspend fun getTvSeriesCast(tvSeriesID: Int, page: Int) = api.getTvSeriesCredit(tvSeriesID, page)
 
-    suspend fun getMovieVideo(movieID: Int) = api.getMovieVideos(movieID)
-    suspend fun getTvSeriesVideo(movieID: Int) = api.getTvSeriesVideos(movieID)
+    suspend fun getMovieTrailer(movieID: Int) = api.getMovieTrailer(movieID)
+    suspend fun getTvSeriesTrailer(tvSeriesID: Int) = api.getTvSeriesTrailer(tvSeriesID)
+
+    suspend fun searchForMovies(page: Int, searchQuery: String) = api.searchForMovies(page, searchQuery)
+    suspend fun searchForTvSeries(page: Int, searchQuery: String) = api.searchForTvSeries(page, searchQuery)
 }

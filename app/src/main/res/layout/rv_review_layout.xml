@@ -3,13 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_10sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/authorImage"
-        android:layout_width="@dimen/_70sdp"
-        android:layout_height="@dimen/_70sdp"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +22,7 @@
         android:textSize="@dimen/_11ssp"
         style="@style/TitleTextStyle"
         android:padding="@dimen/_5sdp"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
         app:layout_constraintStart_toEndOf="@id/authorImage"
         app:layout_constraintTop_toTopOf="@id/authorImage"
         app:layout_constraintEnd_toStartOf="@id/ratingImage"
@@ -57,13 +56,24 @@
         android:id="@+id/reviewContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="This is a first time reviewer"
-        android:fontFamily="@font/raleway_regular"
-        android:textColor="@color/gray"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/ratingImage"
+        android:fontFamily="@font/raleway_regular"
+        android:text="This is a first time reviewer"
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/authorImage"
+        app:layout_constraintTop_toBottomOf="@id/ratingImage"
         />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="#272525"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@id/reviewContent"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

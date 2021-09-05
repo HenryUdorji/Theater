@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.henryudorji.theater.data.model.movie.Movie
-import com.henryudorji.theater.databinding.MovieCustomLayoutBinding
+import com.henryudorji.theater.databinding.RvMovieLayoutBinding
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
 import com.squareup.picasso.Picasso
 
 
-class MovieRecyclerAdapter(): RecyclerView.Adapter<MovieRecyclerAdapter.MovieViewHolder>() {
+class MovieRvAdapter(): RecyclerView.Adapter<MovieRvAdapter.MovieViewHolder>() {
 
-    inner class MovieViewHolder(val binding: MovieCustomLayoutBinding): RecyclerView.ViewHolder(binding.root)
+    inner class MovieViewHolder(val binding: RvMovieLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object: DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -27,7 +27,7 @@ class MovieRecyclerAdapter(): RecyclerView.Adapter<MovieRecyclerAdapter.MovieVie
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val binding = MovieCustomLayoutBinding.inflate(
+        val binding = RvMovieLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

@@ -6,16 +6,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.henryudorji.theater.data.model.cast.Cast
-import com.henryudorji.theater.databinding.CastCustomLayoutBinding
+import com.henryudorji.theater.databinding.RvCastLayoutBinding
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
 import com.squareup.picasso.Picasso
 
-//
-// Created by hash on 5/3/2021.
-//
-class CastRecyclerAdapter(): RecyclerView.Adapter<CastRecyclerAdapter.CastViewHolder>() {
 
-    inner class CastViewHolder(val binding: CastCustomLayoutBinding): RecyclerView.ViewHolder(binding.root)
+class CastRvAdapter(): RecyclerView.Adapter<CastRvAdapter.CastViewHolder>() {
+
+    inner class CastViewHolder(val binding: RvCastLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object: DiffUtil.ItemCallback<Cast>() {
         override fun areItemsTheSame(oldItem: Cast, newItem: Cast): Boolean {
@@ -29,7 +27,7 @@ class CastRecyclerAdapter(): RecyclerView.Adapter<CastRecyclerAdapter.CastViewHo
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CastViewHolder {
-        val binding = CastCustomLayoutBinding.inflate(
+        val binding = RvCastLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

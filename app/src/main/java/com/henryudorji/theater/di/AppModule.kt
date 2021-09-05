@@ -51,7 +51,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePokeDexApi(retrofit: Retrofit): ServiceApi =
+    fun provideServiceApi(retrofit: Retrofit): ServiceApi =
         retrofit.create(ServiceApi::class.java)
 
     @Provides
@@ -62,5 +62,5 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun  provideNetworkManager(@ApplicationContext context: Context) = NetworkManager(context)
+    fun provideNetworkManager(@ApplicationContext context: Context) = NetworkManager(context)
 }

@@ -27,9 +27,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeMoviesFragment: BaseFragment<FragmentHomeDetailBinding, HomeViewModel>() {
     private val TAG = "HomeMoviesFragment"
     override val viewModel: HomeViewModel by activityViewModels()
-    private lateinit var popularAdapter: MovieRecyclerAdapter
-    private lateinit var upcomingAdapter: MovieRecyclerAdapter
-    private lateinit var topRatedAdapter: MovieRecyclerAdapter
+    private lateinit var popularAdapter: MovieRvAdapter
+    private lateinit var upcomingAdapter: MovieRvAdapter
+    private lateinit var topRatedAdapter: MovieRvAdapter
 
     private var page = 1
 
@@ -50,7 +50,6 @@ class HomeMoviesFragment: BaseFragment<FragmentHomeDetailBinding, HomeViewModel>
 
         initViews()
         observeMovieData()
-        ///observeNetworkConnection()
     }
 
 
@@ -122,9 +121,9 @@ class HomeMoviesFragment: BaseFragment<FragmentHomeDetailBinding, HomeViewModel>
     }
 
     private fun initViews() {
-        popularAdapter = MovieRecyclerAdapter()
-        upcomingAdapter = MovieRecyclerAdapter()
-        topRatedAdapter = MovieRecyclerAdapter()
+        popularAdapter = MovieRvAdapter()
+        upcomingAdapter = MovieRvAdapter()
+        topRatedAdapter = MovieRvAdapter()
 
         binding.popularRv.apply {
             adapter = popularAdapter
