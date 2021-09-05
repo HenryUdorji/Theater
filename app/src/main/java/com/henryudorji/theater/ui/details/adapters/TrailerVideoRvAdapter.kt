@@ -2,6 +2,7 @@ package com.henryudorji.theater.ui.details.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class TrailerVideoRvAdapter(): RecyclerView.Adapter<TrailerVideoRvAdapter.TrailerVideoViewHolder>() {
+class TrailerVideoRvAdapter(val lifecycle: Lifecycle) : RecyclerView.Adapter<TrailerVideoRvAdapter.TrailerVideoViewHolder>() {
 
     inner class TrailerVideoViewHolder(val binding: RvTrailerLayoutBinding): RecyclerView.ViewHolder(binding.root)
 
@@ -44,7 +45,7 @@ class TrailerVideoRvAdapter(): RecyclerView.Adapter<TrailerVideoRvAdapter.Traile
         holder.binding.apply {
             //Play video of movie or series
             CoroutineScope(Dispatchers.Main).launch {
-                //addObserver(youtubePlayerView)
+                lifecycle.addObserver(youtubePlayerView)
                 youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
                     override fun onReady(youTubePlayer: YouTubePlayer) {
                         val videoId = video.key

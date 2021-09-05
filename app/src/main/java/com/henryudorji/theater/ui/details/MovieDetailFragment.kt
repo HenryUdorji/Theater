@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.henryudorji.theater.R
 import com.henryudorji.theater.ui.details.adapters.CastRvAdapter
 import com.henryudorji.theater.ui.details.adapters.GenreRvAdapter
 import com.henryudorji.theater.ui.home.movies.MovieRvAdapter
@@ -15,14 +17,15 @@ import com.henryudorji.theater.ui.details.adapters.ReviewRvAdapter
 import com.henryudorji.theater.data.model.detail.Genre
 import com.henryudorji.theater.data.model.detail.MovieDetailResponse
 import com.henryudorji.theater.data.model.detail.TvSeriesDetailResponse
-import com.henryudorji.theater.data.repository.MovieRepository
 import com.henryudorji.theater.databinding.FragmentMovieDetailBinding
 import com.henryudorji.theater.ui.base.BaseFragment
 import com.henryudorji.theater.ui.details.adapters.TrailerVideoRvAdapter
 import com.henryudorji.theater.ui.home.tvseries.TvSeriesRvAdapter
 import com.henryudorji.theater.utils.*
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
+import com.henryudorji.theater.utils.Constants.FRAG_ID
 import com.henryudorji.theater.utils.Constants.MOVIE
+import com.henryudorji.theater.utils.Constants.MOVIE_ID
 import com.henryudorji.theater.utils.Constants.SPACE
 import com.henryudorji.theater.utils.Constants.TV_SERIES
 import com.squareup.picasso.Picasso
@@ -268,7 +271,7 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
         genreRvAdapter = GenreRvAdapter()
         reviewRvAdapter = ReviewRvAdapter()
         castRvAdapter = CastRvAdapter()
-        trailerVideoRvAdapter = TrailerVideoRvAdapter()
+        trailerVideoRvAdapter = TrailerVideoRvAdapter(lifecycle)
 
         genreRv.apply {
             adapter = genreRvAdapter
@@ -278,6 +281,23 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
         recommendedRv.apply {
             adapter = if (fragID == MOVIE) movieRecommendationRvAdapter else tvSeriesRecommendationRvAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+        if (fragID == MOVIE) {
+            movieRecommendationRvAdapter.setOnItemClickListener { movieID ->
+                val bundle = Bundle().apply {
+                    putInt(MOVIE_ID, movieID)
+                    putInt(FRAG_ID, MOVIE)
+                }
+                findNavController().navigate(R.id.action_movieDetailFragment_self, bundle)
+            }
+        }else {
+            tvSeriesRecommendationRvAdapter.setOnItemClickListener { tvSeriesID ->
+                val bundle = Bundle().apply {
+                    putInt(MOVIE_ID, tvSeriesID)
+                    putInt(FRAG_ID, TV_SERIES)
+                }
+                findNavController().navigate(R.id.action_movieDetailFragment_self, bundle)
+            }
         }
 
         reviewRv.apply {
