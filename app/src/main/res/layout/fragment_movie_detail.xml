@@ -2,7 +2,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/app_background_color"
     xmlns:android="http://schemas.android.com/apk/res/android">
@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:fillViewport="true"
+        android:visibility="gone"
         android:scrollbars="none">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -159,40 +160,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/budgetText"
                 />
-<!--
-
-            <TextView
-                android:id="@+id/seasonText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Seasons: 10"
-                android:fontFamily="@font/raleway_regular"
-                android:textSize="@dimen/_11ssp"
-                android:textColor="@color/gray"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/ratingImage"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/revenueText"
-                />
-
-            <TextView
-                android:id="@+id/episodeText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Episode: 90"
-                android:fontFamily="@font/raleway_regular"
-                android:textSize="@dimen/_11ssp"
-                android:textColor="@color/gray"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@id/ratingImage"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/budgetText"
-                />
--->
 
 
             <TextView
@@ -264,25 +231,7 @@
                 android:layout_marginStart="@dimen/_10sdp"
                 app:layout_constraintTop_toBottomOf="@id/movieOverviewText"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/showAllCastText"
                 />
-
-            <TextView
-                android:id="@+id/showAllCastText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_10sdp"
-                android:fontFamily="@font/raleway_regular"
-                android:padding="@dimen/_10sdp"
-                android:text="@string/show_all"
-                android:textColor="@color/red"
-                android:textSize="@dimen/_10ssp"
-                app:layout_constraintBottom_toBottomOf="@+id/castText"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/castText"
-                app:layout_constraintTop_toTopOf="@+id/castText"
-                />
-
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/castRv"
@@ -383,8 +332,8 @@
 
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="@dimen/_60sdp"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

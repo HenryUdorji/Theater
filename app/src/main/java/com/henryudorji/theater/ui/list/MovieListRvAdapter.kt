@@ -1,4 +1,4 @@
-package com.henryudorji.theater.ui.home.movies
+package com.henryudorji.theater.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,14 +6,14 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.henryudorji.theater.data.model.movie.Movie
-import com.henryudorji.theater.databinding.RvMovieLayoutBinding
+import com.henryudorji.theater.databinding.RvMovieLayoutListBinding
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
 import com.squareup.picasso.Picasso
 
 
-class MovieRvAdapter(): RecyclerView.Adapter<MovieRvAdapter.MovieViewHolder>() {
+class MovieListRvAdapter(): RecyclerView.Adapter<MovieListRvAdapter.MovieViewHolder>() {
 
-    inner class MovieViewHolder(val binding: RvMovieLayoutBinding): RecyclerView.ViewHolder(binding.root)
+    inner class MovieViewHolder(val binding: RvMovieLayoutListBinding): RecyclerView.ViewHolder(binding.root)
 
     private val differCallback = object: DiffUtil.ItemCallback<Movie>() {
         override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
@@ -27,7 +27,7 @@ class MovieRvAdapter(): RecyclerView.Adapter<MovieRvAdapter.MovieViewHolder>() {
     val differ = AsyncListDiffer(this, differCallback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val binding = RvMovieLayoutBinding.inflate(
+        val binding = RvMovieLayoutListBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -40,9 +40,7 @@ class MovieRvAdapter(): RecyclerView.Adapter<MovieRvAdapter.MovieViewHolder>() {
 
         holder.binding.apply {
             Picasso.get().load(BASE_URL_IMAGE + movie.posterPath).into(movieImage)
-
-            movieTitleText.text = movie.title
-
+            movieTitleText.text = movie.originalTitle
             ratingText.text = movie.voteAverage.toString()
 
             this.root.setOnClickListener {

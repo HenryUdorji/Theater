@@ -33,7 +33,8 @@
             android:defaultValue="1" />
         <action
             android:id="@+id/action_movieDetailFragment_self"
-            app:destination="@id/movieDetailFragment" />
+            app:destination="@id/movieDetailFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"

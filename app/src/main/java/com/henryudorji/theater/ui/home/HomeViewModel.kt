@@ -11,7 +11,9 @@ import com.henryudorji.theater.utils.NetworkManager
 import com.henryudorji.theater.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import java.lang.Exception
 import javax.inject.Inject
 
@@ -43,6 +45,12 @@ class HomeViewModel @Inject constructor (
     private val _topRatedTvSeriesLiveData = MutableLiveData<Resource<TvSeriesResponse>>()
     val topRatedTvSeriesLiveData: LiveData<Resource<TvSeriesResponse>> = _topRatedTvSeriesLiveData
 
+    private val _searchMoviesLiveData = MutableLiveData<Resource<MovieResponse>>()
+    val searchMoviesLiveData: LiveData<Resource<MovieResponse>> = _searchMoviesLiveData
+
+    private val _searchTvSeriesLiveData = MutableLiveData<Resource<TvSeriesResponse>>()
+    val searchTvSeriesLiveData: LiveData<Resource<TvSeriesResponse>> = _searchTvSeriesLiveData
+
     val page = 1
 
 
@@ -56,7 +64,8 @@ class HomeViewModel @Inject constructor (
                         _topRatedMoviesLiveData.postValue(Resource.Success(movieResponse))
                     }
                 }else  {
-                    _topRatedMoviesLiveData.postValue(Resource.Error(topRatedMoviesResponse.errorBody().toString()))
+                    _topRatedMoviesLiveData.postValue(Resource.Error("Ooops!! something happened," +
+                            " try again"))
                 }
             } catch (e: Exception) {
                 _topRatedMoviesLiveData.postValue(Resource.Error(e.localizedMessage))
@@ -175,6 +184,54 @@ class HomeViewModel @Inject constructor (
             }
         }else {
             _popularTvSeriesLiveData.postValue(Resource.Error(
+                "internet not available, check connection"
+            ))
+        }
+    }
+
+    fun searchMovies(page: Int, searchQuery: String) = viewModelScope.launch(Dispatchers.IO) {
+        _searchMoviesLiveData.postValue(Resource.Loading())
+
+        if (networkObserver.value == true) {
+            try {
+                val response = repository.searchForMovies(page, searchQuery)
+                if (response.isSuccessful) {
+                    response.body()?.let { searchResponse ->
+                        _searchMoviesLiveData.postValue(Resource.Success(searchResponse))
+                    }
+                }else {
+                    _searchMoviesLiveData.postValue(Resource.Error("Ooops!! something happened, " +
+                            "try again"))
+                }
+            }catch (e: Exception) {
+                _searchMoviesLiveData.postValue(Resource.Error(e.localizedMessage))
+            }
+        }else {
+            _searchMoviesLiveData.postValue(Resource.Error(
+                "internet not available, check connection"
+            ))
+        }
+    }
+
+    fun searchTvSeries(page: Int, searchQuery: String) = viewModelScope.launch(Dispatchers.IO) {
+        _searchTvSeriesLiveData.postValue(Resource.Loading())
+
+        if (networkObserver.value == true) {
+            try {
+                val response = repository.searchForTvSeries(page, searchQuery)
+                if (response.isSuccessful) {
+                    response.body()?.let { searchResponse ->
+                        _searchTvSeriesLiveData.postValue(Resource.Success(searchResponse))
+                    }
+                }else {
+                    _searchTvSeriesLiveData.postValue(Resource.Error("Ooops!! something happened, " +
+                            "try again"))
+                }
+            }catch (e: Exception) {
+                _searchTvSeriesLiveData.postValue(Resource.Error(e.localizedMessage))
+            }
+        }else {
+            _searchTvSeriesLiveData.postValue(Resource.Error(
                 "internet not available, check connection"
             ))
         }

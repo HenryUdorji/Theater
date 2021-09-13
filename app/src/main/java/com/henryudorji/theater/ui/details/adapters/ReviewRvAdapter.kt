@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.henryudorji.theater.R
 import com.henryudorji.theater.data.model.review.Review
 import com.henryudorji.theater.databinding.RvReviewLayoutBinding
 import com.henryudorji.theater.utils.Constants.BASE_URL_IMAGE
@@ -39,7 +40,10 @@ class ReviewRvAdapter(): RecyclerView.Adapter<ReviewRvAdapter.ReviewViewHolder>(
         val review = differ.currentList[position]
 
         holder.binding.apply {
-            Picasso.get().load(BASE_URL_IMAGE + review.authorDetails.avatarPath).into(authorImage)
+            Picasso.get()
+                .load(BASE_URL_IMAGE + review.authorDetails.avatarPath)
+                .placeholder(R.drawable.profile_placeholder)
+                .into(authorImage)
             authorName.text = review.authorDetails.name
             ratingText.text = review.authorDetails.rating.toString()
             reviewContent.text = review.content

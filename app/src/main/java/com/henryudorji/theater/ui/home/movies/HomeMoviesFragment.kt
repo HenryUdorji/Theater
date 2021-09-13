@@ -12,6 +12,7 @@ import com.henryudorji.theater.R
 import com.henryudorji.theater.databinding.FragmentHomeDetailBinding
 import com.henryudorji.theater.ui.base.BaseFragment
 import com.henryudorji.theater.ui.home.HomeViewModel
+import com.henryudorji.theater.ui.home.MovieRvAdapter
 import com.henryudorji.theater.utils.*
 import com.henryudorji.theater.utils.Constants.FRAG_ID
 import com.henryudorji.theater.utils.Constants.MOVIE

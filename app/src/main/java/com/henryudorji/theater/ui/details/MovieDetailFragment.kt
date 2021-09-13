@@ -12,7 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.henryudorji.theater.R
 import com.henryudorji.theater.ui.details.adapters.CastRvAdapter
 import com.henryudorji.theater.ui.details.adapters.GenreRvAdapter
-import com.henryudorji.theater.ui.home.movies.MovieRvAdapter
+import com.henryudorji.theater.ui.home.MovieRvAdapter
 import com.henryudorji.theater.ui.details.adapters.ReviewRvAdapter
 import com.henryudorji.theater.data.model.detail.Genre
 import com.henryudorji.theater.data.model.detail.MovieDetailResponse
@@ -88,6 +88,9 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
                                     movieRecommendationRvAdapter.differ
                                         .submitList(state.data?.movies?.subList(0, 10))
                                 }else movieRecommendationRvAdapter.differ.submitList(recommendation)
+                            }else {
+                                recommendedRv.hide()
+                                recommendedText.hide()
                             }
                         }
                         is Resource.Error -> {
@@ -131,10 +134,7 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
                 is Resource.Success -> {
                     val cast = state.data?.cast
                     if (cast?.isNotEmpty() == true) {
-                        if (cast.size > 10) {
-                            castRvAdapter.differ
-                                .submitList(state.data?.cast?.subList(0, 10))
-                        }else castRvAdapter.differ.submitList(cast)
+                        castRvAdapter.differ.submitList(cast)
                     }
                 }
                 is Resource.Error -> {
@@ -157,7 +157,8 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
                         if (reviews.size > 10) {
                             reviewRvAdapter.differ.submitList(reviews.subList(0, 10))
                         }else reviewRvAdapter.differ.submitList(reviews)
-                    }
+                    }else reviewRvAdapter.differ.submitList(mutableListOf())
+
                     val reviewSize = AppUtils.coolNumberFormat(reviews?.size?.toLong()!!)
                     totalReviewText.text = "$reviewSize reviews"
                 }
@@ -199,8 +200,9 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
                                 videoRv.hide()
                                 watch.hide()
                             }
-                            showInitialDetail(state.data, null)
+                            normalLayout.show()
                             progressBar.hide()
+                            showInitialDetail(state.data, null)
                         }
                         is Resource.Error -> {
                             state.message?.let {
@@ -209,7 +211,10 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
                                 progressBar.hide()
                             }
                         }
-                        is Resource.Loading -> progressBar.show()
+                        is Resource.Loading -> {
+                            progressBar.show()
+                            normalLayout.hide()
+                        }
                     }
                 }
             }
@@ -217,8 +222,9 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
                 viewModel.tvSeriesDetailLiveData.observe(viewLifecycleOwner) { state ->
                     when(state) {
                         is Resource.Success -> {
-                            showInitialDetail(null, state.data)
+                            normalLayout.show()
                             progressBar.hide()
+                            showInitialDetail(null, state.data)
                         }
                         is Resource.Error -> {
                             state.message?.let {
@@ -227,7 +233,10 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
                                 progressBar.hide()
                             }
                         }
-                        is Resource.Loading -> progressBar.show()
+                        is Resource.Loading -> {
+                            progressBar.show()
+                            normalLayout.hide()
+                        }
                     }
                 }
             }
@@ -315,10 +324,6 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
             adapter = trailerVideoRvAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             addItemDecoration(SpacesItemDecorator(SPACE))
-        }
-
-        showAllCastText.setOnClickListener {
-            //@todo cast
         }
 
         showAllReviewsText.setOnClickListener {

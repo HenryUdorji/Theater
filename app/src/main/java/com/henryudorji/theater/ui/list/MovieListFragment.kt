@@ -31,7 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MovieListFragment: BaseFragment<FragmentMovieListBinding, ListViewModel>() {
     private val TAG = "MovieListFragment"
-    private lateinit var movieListAdapter: MovieListRecyclerAdapter
+    private lateinit var movieListAdapter: MovieListRvAdapter
     private lateinit var movieCategory: String
     private var fragID: Int = 1
     private lateinit var movieRepository: MovieRepository
@@ -150,7 +150,7 @@ class MovieListFragment: BaseFragment<FragmentMovieListBinding, ListViewModel>()
 
         binding.toolbarTitle.text = getTitle()
 
-        movieListAdapter = MovieListRecyclerAdapter()
+        movieListAdapter = MovieListRvAdapter()
 
         binding.movieListRv.apply {
             adapter = movieListAdapter
