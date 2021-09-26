@@ -11,7 +11,7 @@ movies and tv series data
 - Movies and TvSeries
 
 # Download the App
-[iQuest apk](app-release.apk)
+[Theater apk](app-release.apk)
 
 
 # Built With 🛠
