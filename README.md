@@ -11,7 +11,7 @@ movies and tv series data
 - Movies and TvSeries
 
 # Download the App
-[Theater apk](app-release.apk)
+[Theater apk](Theater.apk)
 
 
 # Built With 🛠
