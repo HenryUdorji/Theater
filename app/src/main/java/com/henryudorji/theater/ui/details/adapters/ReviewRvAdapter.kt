@@ -46,7 +46,12 @@ class ReviewRvAdapter(): RecyclerView.Adapter<ReviewRvAdapter.ReviewViewHolder>(
                 .into(authorImage)
             authorName.text = review.authorDetails.name
             ratingText.text = review.authorDetails.rating.toString()
-            reviewContent.text = review.content
+            reviewContent.apply {
+                text = review.content
+                setShowingLine(5)
+                setShowMoreColor(resources.getColor(R.color.red, null))
+                setShowLessTextColor(resources.getColor(R.color.red, null))
+            }
         }
     }
 

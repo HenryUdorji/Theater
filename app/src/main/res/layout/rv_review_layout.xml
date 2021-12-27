@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         />
 
-    <TextView
+    <com.skyhope.showmoretextview.ShowMoreTextView
         android:id="@+id/reviewContent"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

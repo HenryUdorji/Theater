@@ -328,6 +328,7 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
 
         showAllReviewsText.setOnClickListener {
             //@todo review
+            Snackbar.make(binding.root, "Feature coming soon", Snackbar.LENGTH_SHORT).show()
         }
     }
 }

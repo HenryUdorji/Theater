@@ -171,28 +171,31 @@ class HomeTvSeriesFragment: BaseFragment<FragmentHomeDetailBinding, HomeViewMode
 
 
         binding.showAllPopularText.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString(MOVIE_CATEGORY, POPULAR)
-                putInt(FRAG_ID, TV_SERIES)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+//            val bundle = Bundle().apply {
+//                putString(MOVIE_CATEGORY, POPULAR)
+//                putInt(FRAG_ID, TV_SERIES)
+//            }
+//            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            Snackbar.make(binding.root, "Feature coming soon", Snackbar.LENGTH_SHORT).show()
         }
 
         //Latest is the same as Upcoming
         binding.showAllUpcomingMoviesText.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString(MOVIE_CATEGORY, ON_THE_AIR)
-                putInt(FRAG_ID, TV_SERIES)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+//            val bundle = Bundle().apply {
+//                putString(MOVIE_CATEGORY, ON_THE_AIR)
+//                putInt(FRAG_ID, TV_SERIES)
+//            }
+//            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            Snackbar.make(binding.root, "Feature coming soon", Snackbar.LENGTH_SHORT).show()
         }
 
         binding.showAllTopRatedMoviesText.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString(MOVIE_CATEGORY, TOP_RATED)
-                putInt(FRAG_ID, TV_SERIES)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+//            val bundle = Bundle().apply {
+//                putString(MOVIE_CATEGORY, TOP_RATED)
+//                putInt(FRAG_ID, TV_SERIES)
+//            }
+//            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            Snackbar.make(binding.root, "Feature coming soon", Snackbar.LENGTH_SHORT).show()
         }
     }
 }

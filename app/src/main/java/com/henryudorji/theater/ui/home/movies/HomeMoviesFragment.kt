@@ -172,27 +172,30 @@ class HomeMoviesFragment: BaseFragment<FragmentHomeDetailBinding, HomeViewModel>
         }
 
         binding.showAllPopularText.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString(MOVIE_CATEGORY, POPULAR)
-                putInt(FRAG_ID, MOVIE)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+//            val bundle = Bundle().apply {
+//                putString(MOVIE_CATEGORY, POPULAR)
+//                putInt(FRAG_ID, MOVIE)
+//            }
+//            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            Snackbar.make(binding.root, "Feature coming soon", Snackbar.LENGTH_SHORT).show()
         }
 
         binding.showAllUpcomingMoviesText.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString(MOVIE_CATEGORY, UPCOMING)
-                putInt(FRAG_ID, MOVIE)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+//            val bundle = Bundle().apply {
+//                putString(MOVIE_CATEGORY, UPCOMING)
+//                putInt(FRAG_ID, MOVIE)
+//            }
+//            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            Snackbar.make(binding.root, "Feature coming soon", Snackbar.LENGTH_SHORT).show()
         }
 
         binding.showAllTopRatedMoviesText.setOnClickListener {
-            val bundle = Bundle().apply {
-                putString(MOVIE_CATEGORY, TOP_RATED)
-                putInt(FRAG_ID, MOVIE)
-            }
-            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+//            val bundle = Bundle().apply {
+//                putString(MOVIE_CATEGORY, TOP_RATED)
+//                putInt(FRAG_ID, MOVIE)
+//            }
+//            findNavController().navigate(R.id.action_homeFragment_to_movieListFragment, bundle)
+            Snackbar.make(binding.root, "Feature coming soon", Snackbar.LENGTH_SHORT).show()
         }
     }
 
