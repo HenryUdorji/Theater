@@ -15,18 +15,18 @@ android {
         applicationId "com.henryudorji.theater"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
         release {
-            storeFile file("C:/WorkFolder/ClientProjects/Android/Keystore.jks")
-            storePassword "@Ifechukwu1998"
-            keyAlias "AndroidKey"
-            keyPassword "@Ifechukwu1998"
+            storeFile file("C:/Users/ifechukwu.udorji/WorkFolder/Personal/Android/Theater/HashConceptsKey.jks")
+            storePassword "@Henry1998"
+            keyAlias "HashConceptsKey"
+            keyPassword "@Henry1998"
         }
     }
 
@@ -124,9 +124,6 @@ dependencies {
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     kapt "androidx.hilt:hilt-compiler:$hilt_androidX_version"
-
-    //Fast Adapter
-    implementation "com.mikepenz:fastadapter:5.4.1"
 
     //Show more text
     implementation 'com.github.mahimrocky:ShowMoreText:1.0.2'
