@@ -6,6 +6,15 @@ plugins {
     id "androidx.navigation.safeargs"
     id "dagger.hilt.android.plugin"
 }
+// Creates a variable called keystorePropertiesFile, and initializes it to the
+// keystore.properties file.
+def localPropertiesFile = rootProject.file("local.properties")
+
+// Initializes a new Properties() object called localProperties.
+def localProperties = new Properties()
+
+// Loads the local.properties file into the localProperties object.
+localProperties.load(new FileInputStream(localPropertiesFile))
 
 android {
     compileSdkVersion 31
@@ -15,18 +24,18 @@ android {
         applicationId "com.henryudorji.theater"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
         release {
-            storeFile file("C:/Users/ifechukwu.udorji/WorkFolder/Personal/Android/Theater/HashConceptsKey.jks")
-            storePassword "@Henry1998"
-            keyAlias "HashConceptsKey"
-            keyPassword "@Henry1998"
+            storeFile file(localProperties['SIGNING_JKS_FILE_PATH'])
+            storePassword localProperties['SIGNING_KEYSTORE_PASSWORD']
+            keyAlias localProperties['SIGNING_KEY_ALIAS']
+            keyPassword localProperties['SIGNING_KEY_PASSWORD']
         }
     }
 

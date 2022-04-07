@@ -17,7 +17,19 @@ import kotlinx.coroutines.launch
 
 class TrailerVideoRvAdapter(val lifecycle: Lifecycle) : RecyclerView.Adapter<TrailerVideoRvAdapter.TrailerVideoViewHolder>() {
 
-    inner class TrailerVideoViewHolder(val binding: RvTrailerLayoutBinding): RecyclerView.ViewHolder(binding.root)
+    inner class TrailerVideoViewHolder(val binding: RvTrailerLayoutBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(video: Video?) {
+            video?.let {
+                //Play video of movie or series
+                binding.youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                    override fun onReady(youTubePlayer: YouTubePlayer) {
+                        val videoId = it.key
+                        youTubePlayer.cueVideo(videoId, 0f)
+                    }
+                })
+            }
+        }
+    }
 
     private val differCallback = object: DiffUtil.ItemCallback<Video>() {
         override fun areItemsTheSame(oldItem: Video, newItem: Video): Boolean {
@@ -36,24 +48,14 @@ class TrailerVideoRvAdapter(val lifecycle: Lifecycle) : RecyclerView.Adapter<Tra
             parent,
             false
         )
+        lifecycle.addObserver(binding.youtubePlayerView)
         return TrailerVideoViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TrailerVideoViewHolder, position: Int) {
         val video = differ.currentList[position]
 
-        holder.binding.apply {
-            //Play video of movie or series
-            CoroutineScope(Dispatchers.Main).launch {
-                lifecycle.addObserver(youtubePlayerView)
-                youtubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                    override fun onReady(youTubePlayer: YouTubePlayer) {
-                        val videoId = video.key
-                        youTubePlayer.cueVideo(videoId, 0f)
-                    }
-                })
-            }
-        }
+        holder.bind(video)
     }
 
     override fun getItemCount(): Int {

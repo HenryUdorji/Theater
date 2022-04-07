@@ -14,11 +14,11 @@ data class TvSeriesDetailResponse(
         @SerializedName("name")
         val name: String,
         @SerializedName("episode_runtime")
-        val episodeRunTime: String,
+        val episodeRunTime: String?,
         @SerializedName("number_of_episodes")
-        val numberOfEpisodes: Int,
+        val numberOfEpisodes: Int?,
         @SerializedName("number_of_seasons")
-        val numberOfSeasons: Int,
+        val numberOfSeasons: Int?,
         @SerializedName("original_name")
         val originalName: String,
         @SerializedName("overview")

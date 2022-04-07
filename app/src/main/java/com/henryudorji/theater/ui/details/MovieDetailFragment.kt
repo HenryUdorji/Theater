@@ -244,26 +244,28 @@ class MovieDetailFragment: BaseFragment<FragmentMovieDetailBinding, DetailsViewM
     }
 
     private fun showInitialDetail(movieData: MovieDetailResponse?, tvData: TvSeriesDetailResponse?) {
-        val genreList: List<Genre>
+        var genreList: List<Genre> = mutableListOf()
         if (movieData == null) {
             Picasso.get().load(BASE_URL_IMAGE + tvData?.posterPath).into(binding.barImage)
-            binding.movieTitle.text = tvData?.name
-            binding.ratingText.text = tvData?.voteAverage.toString()
-            binding.runtimeText.text = "${tvData?.episodeRunTime.toString()} minutes"
-            genreList = tvData?.genres!!
-            binding.movieOverviewText.text = tvData.overview
-            binding.budgetText.text = "Seasons: ${tvData.numberOfSeasons}"
-            binding.revenueText.text = "Episodes: ${tvData.numberOfEpisodes}"
-        }else {
+            tvData?.let {
+                binding.movieTitle.text = it.name
+                binding.ratingText.text = it.voteAverage.toString()
+                binding.runtimeText.text = "${it.episodeRunTime ?: "..."} minutes"
+                genreList = it.genres
+                binding.movieOverviewText.text = it.overview
+                binding.budgetText.text = "Seasons: ${it.numberOfSeasons ?: "..."}"
+                binding.revenueText.text = "Episodes: ${it.numberOfEpisodes ?: "..."}"
+            }
+        } else {
             Picasso.get().load(BASE_URL_IMAGE + movieData.posterPath).into(binding.barImage)
             binding.movieTitle.text = movieData.title
             binding.ratingText.text = movieData.voteAverage.toString()
-            binding.runtimeText.text = "${movieData.runtime} minutes"
+            binding.runtimeText.text = "${movieData.runtime ?: "..."} minutes"
             genreList = movieData.genres
             binding.movieOverviewText.text = movieData.overview
 
-            val budget = AppUtils.coolNumberFormat(movieData.budget.toLong())
-            val revenue = AppUtils.coolNumberFormat(movieData.revenue.toLong())
+            val budget = AppUtils.coolNumberFormat(movieData.budget?.toLong())
+            val revenue = AppUtils.coolNumberFormat(movieData.revenue?.toLong())
             binding.budgetText.text = "Budget: $$budget"
             binding.revenueText.text = "Revenue: $$revenue"
         }

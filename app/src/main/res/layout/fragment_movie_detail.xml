@@ -69,41 +69,20 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 />
 
-            <ImageView
-                android:id="@+id/ratingImage"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/ic_star"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginStart="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/movieTitle"
-                app:layout_constraintStart_toStartOf="parent"
-                />
-
             <TextView
                 android:id="@+id/ratingText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_2sdp"
                 android:fontFamily="@font/raleway_regular"
                 android:text=""
                 android:textSize="@dimen/_11ssp"
                 android:textColor="@color/gray"
-                app:layout_constraintStart_toEndOf="@id/ratingImage"
-                app:layout_constraintTop_toTopOf="@id/ratingImage"
-                app:layout_constraintBottom_toBottomOf="@id/ratingImage"
-                />
-
-            <ImageView
-                android:id="@+id/timeImage"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/ic_time"
-                android:layout_marginStart="@dimen/_20sdp"
-                app:layout_constraintStart_toEndOf="@id/ratingText"
-                app:layout_constraintTop_toTopOf="@id/ratingText"
-                app:layout_constraintBottom_toBottomOf="@id/ratingText"
-                />
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:drawablePadding="@dimen/_5sdp"
+                app:layout_constraintTop_toBottomOf="@id/movieTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:drawableStartCompat="@drawable/ic_star" />
 
             <TextView
                 android:id="@+id/runtime_text"
@@ -111,13 +90,14 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_regular"
                 android:text=""
-                android:layout_marginStart="@dimen/_2sdp"
                 android:textSize="@dimen/_11ssp"
                 android:textColor="@color/gray"
-                app:layout_constraintStart_toEndOf="@id/timeImage"
-                app:layout_constraintTop_toTopOf="@id/timeImage"
-                app:layout_constraintBottom_toBottomOf="@id/timeImage"
-                />
+                android:layout_marginStart="@dimen/_20sdp"
+                android:drawablePadding="@dimen/_5sdp"
+                app:layout_constraintStart_toEndOf="@id/ratingText"
+                app:layout_constraintTop_toTopOf="@id/ratingText"
+                app:layout_constraintBottom_toBottomOf="@id/ratingText"
+                app:drawableStartCompat="@drawable/ic_time" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/genreRv"
@@ -141,7 +121,7 @@
                 android:textColor="@color/gray"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/ratingImage"
+                app:layout_constraintTop_toBottomOf="@id/ratingText"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/revenueText"
                 />
@@ -156,7 +136,7 @@
                 android:textColor="@color/gray"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
-                app:layout_constraintTop_toBottomOf="@id/ratingImage"
+                app:layout_constraintTop_toBottomOf="@id/ratingText"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/budgetText"
                 />
