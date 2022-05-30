@@ -10,8 +10,11 @@ movies and tv series data
 - See full movie cast
 - Movies and TvSeries
 
-# Download the App
-[Theater apk](Theater.apk)
+<a href="https://play.google.com/store/apps/details?id=com.henryudorji.theater">
+<img src="https://cdn.jsdelivr.net/gh/steverichey/google-play-badge-svg/img/en_get.svg" width="30%">
+</a>
+
+![Screens](images/merge_from_ofoct.jpg)
 
 
 # Built With 🛠
