@@ -14,7 +14,7 @@ movies and tv series data
 <img src="https://cdn.jsdelivr.net/gh/steverichey/google-play-badge-svg/img/en_get.svg" width="30%">
 </a>
 
-![Screens](images/merge_from_ofoct (1).jpg)
+![Screens](images/merge_from_ofoct%20(1).jpg)
 
 
 # Built With 🛠
